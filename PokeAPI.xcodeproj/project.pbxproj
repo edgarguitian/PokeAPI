@@ -33,6 +33,15 @@
 		6DFD39892B473577002006EE /* PokemonListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD39882B473577002006EE /* PokemonListFactory.swift */; };
 		6DFD398B2B473897002006EE /* PokemonListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD398A2B473897002006EE /* PokemonListResponseDTO.swift */; };
 		6DFD398D2B4738E4002006EE /* PokemonListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD398C2B4738E4002006EE /* PokemonListResponse.swift */; };
+		6DFD398F2B47C1DE002006EE /* PokemonListDomainMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD398E2B47C1DE002006EE /* PokemonListDomainMapper.swift */; };
+		6DFD39912B47C38D002006EE /* PokemonEntryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD39902B47C38D002006EE /* PokemonEntryDTO.swift */; };
+		6DFD39932B47C3EC002006EE /* PokemonEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD39922B47C3EC002006EE /* PokemonEntry.swift */; };
+		6DFD39952B47CAB2002006EE /* PokemonListInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD39942B47CAB2002006EE /* PokemonListInfoResponse.swift */; };
+		6DFD39972B47CB0B002006EE /* PokemonListInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD39962B47CB0B002006EE /* PokemonListInfoResponseDTO.swift */; };
+		6DFD39992B47CB41002006EE /* PokemonListInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD39982B47CB41002006EE /* PokemonListInfo.swift */; };
+		6DFD399B2B47CB6A002006EE /* PokemonListInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD399A2B47CB6A002006EE /* PokemonListInfoDTO.swift */; };
+		6DFD399D2B47D3B5002006EE /* PokemonListPresentableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD399C2B47D3B5002006EE /* PokemonListPresentableItem.swift */; };
+		6DFD399F2B47D49F002006EE /* PokemonSpritesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD399E2B47D49F002006EE /* PokemonSpritesDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +72,15 @@
 		6DFD39882B473577002006EE /* PokemonListFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListFactory.swift; sourceTree = "<group>"; };
 		6DFD398A2B473897002006EE /* PokemonListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListResponseDTO.swift; sourceTree = "<group>"; };
 		6DFD398C2B4738E4002006EE /* PokemonListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListResponse.swift; sourceTree = "<group>"; };
+		6DFD398E2B47C1DE002006EE /* PokemonListDomainMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListDomainMapper.swift; sourceTree = "<group>"; };
+		6DFD39902B47C38D002006EE /* PokemonEntryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEntryDTO.swift; sourceTree = "<group>"; };
+		6DFD39922B47C3EC002006EE /* PokemonEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonEntry.swift; sourceTree = "<group>"; };
+		6DFD39942B47CAB2002006EE /* PokemonListInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListInfoResponse.swift; sourceTree = "<group>"; };
+		6DFD39962B47CB0B002006EE /* PokemonListInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListInfoResponseDTO.swift; sourceTree = "<group>"; };
+		6DFD39982B47CB41002006EE /* PokemonListInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListInfo.swift; sourceTree = "<group>"; };
+		6DFD399A2B47CB6A002006EE /* PokemonListInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListInfoDTO.swift; sourceTree = "<group>"; };
+		6DFD399C2B47D3B5002006EE /* PokemonListPresentableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListPresentableItem.swift; sourceTree = "<group>"; };
+		6DFD399E2B47D49F002006EE /* PokemonSpritesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSpritesDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +163,9 @@
 		6DFD39562B473345002006EE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				6DFD39762B4734B7002006EE /* PokemonPresentableErrorMapper.swift */,
 				6DFD39842B473561002006EE /* PokemonListViewModel.swift */,
+				6DFD39762B4734B7002006EE /* PokemonPresentableErrorMapper.swift */,
+				6DFD399C2B47D3B5002006EE /* PokemonListPresentableItem.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -211,6 +230,9 @@
 			isa = PBXGroup;
 			children = (
 				6DFD398C2B4738E4002006EE /* PokemonListResponse.swift */,
+				6DFD39922B47C3EC002006EE /* PokemonEntry.swift */,
+				6DFD39942B47CAB2002006EE /* PokemonListInfoResponse.swift */,
+				6DFD39982B47CB41002006EE /* PokemonListInfo.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -219,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				6DFD39742B473498002006EE /* PokemonDomainErrorMapper.swift */,
+				6DFD398E2B47C1DE002006EE /* PokemonListDomainMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -227,6 +250,10 @@
 			isa = PBXGroup;
 			children = (
 				6DFD398A2B473897002006EE /* PokemonListResponseDTO.swift */,
+				6DFD39902B47C38D002006EE /* PokemonEntryDTO.swift */,
+				6DFD39962B47CB0B002006EE /* PokemonListInfoResponseDTO.swift */,
+				6DFD399A2B47CB6A002006EE /* PokemonListInfoDTO.swift */,
+				6DFD399E2B47D49F002006EE /* PokemonSpritesDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -340,28 +367,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DFD398D2B4738E4002006EE /* PokemonListResponse.swift in Sources */,
+				6DFD39992B47CB41002006EE /* PokemonListInfo.swift in Sources */,
 				6DFD39792B4734F6002006EE /* GetPokemonList.swift in Sources */,
 				6DFD39732B47346B002006EE /* PokemonDomainError.swift in Sources */,
+				6DFD399F2B47D49F002006EE /* PokemonSpritesDTO.swift in Sources */,
 				6DFD39752B473498002006EE /* PokemonDomainErrorMapper.swift in Sources */,
 				6DFD39772B4734B7002006EE /* PokemonPresentableErrorMapper.swift in Sources */,
 				6DFD397F2B473526002006EE /* PokemonListRepository.swift in Sources */,
 				6DFD39462B4732F5002006EE /* ContentView.swift in Sources */,
+				6DFD399D2B47D3B5002006EE /* PokemonListPresentableItem.swift in Sources */,
 				6DFD39892B473577002006EE /* PokemonListFactory.swift in Sources */,
 				6DFD397B2B4734FF002006EE /* GetPokemonListType.swift in Sources */,
 				6DFD39692B4733D4002006EE /* URLSessionRequestMaker.swift in Sources */,
 				6DFD396D2B47340C002006EE /* Endpoint.swift in Sources */,
+				6DFD398F2B47C1DE002006EE /* PokemonListDomainMapper.swift in Sources */,
+				6DFD39952B47CAB2002006EE /* PokemonListInfoResponse.swift in Sources */,
 				6DFD398B2B473897002006EE /* PokemonListResponseDTO.swift in Sources */,
 				6DFD39812B473540002006EE /* APIPokemonListDataSourceType.swift in Sources */,
 				6DFD396B2B4733F9002006EE /* HTTPClientError.swift in Sources */,
 				6DFD39442B4732F5002006EE /* PokeAPIApp.swift in Sources */,
 				6DFD396F2B473418002006EE /* HTTPMethod.swift in Sources */,
+				6DFD399B2B47CB6A002006EE /* PokemonListInfoDTO.swift in Sources */,
 				6DFD39712B47341F002006EE /* HTTPClient.swift in Sources */,
 				6DFD39832B473548002006EE /* APIPokemonListDataSource.swift in Sources */,
 				6DFD39532B47331A002006EE /* Foundation+Extensions.swift in Sources */,
+				6DFD39932B47C3EC002006EE /* PokemonEntry.swift in Sources */,
 				6DFD39652B4733BB002006EE /* URLSessionHTTPCLient.swift in Sources */,
+				6DFD39972B47CB0B002006EE /* PokemonListInfoResponseDTO.swift in Sources */,
 				6DFD397D2B473514002006EE /* PokemonListRepositoryType.swift in Sources */,
 				6DFD39852B473561002006EE /* PokemonListViewModel.swift in Sources */,
 				6DFD39872B47356A002006EE /* PokemonListView.swift in Sources */,
+				6DFD39912B47C38D002006EE /* PokemonEntryDTO.swift in Sources */,
 				6DFD39672B4733C9002006EE /* URLSessionErrorResolver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

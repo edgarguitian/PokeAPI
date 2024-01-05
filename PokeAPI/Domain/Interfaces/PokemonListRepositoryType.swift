@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PokemonListRepositoryType {
-    func getPokemonList() async -> Result<PokemonListResponse, PokemonDomainError>
+    func getPokemonList() async -> Result<PokemonListInfoResponse, PokemonDomainError>
 }

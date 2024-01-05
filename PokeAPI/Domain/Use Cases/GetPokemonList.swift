@@ -14,7 +14,17 @@ class GetPokemonList: GetPokemonListType {
         self.repository = repository
     }
     
-    func execute() async -> Result<PokemonListResponse, PokemonDomainError> {
+    func execute() async -> Result<PokemonListInfoResponse, PokemonDomainError> {
+        let result = await repository.getPokemonList()
         
+        guard let pokemonListResult = try? result.get() else {
+            guard case .failure(let error) = result else {
+                return .failure(.generic)
+            }
+
+            return .failure(error)
+        }
+        
+        return .success(pokemonListResult)
     }
 }

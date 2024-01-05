@@ -8,9 +8,9 @@
 import Foundation
 
 class PokemonListResponse {
-    let name: String
+    let results: [PokemonEntry]
     
-    init(name: String) {
-        self.name = name
+    init(results: [PokemonEntry]) {
+        self.results = results
     }
 }

@@ -8,9 +8,6 @@
 import Foundation
 
 struct PokemonListResponseDTO: Decodable {
-    let name: String
-    
-    enum CodingKeys: String, CodingKey {
-        case name = "name"
-    }
+    let results: [PokemonEntryDTO]
+
 }
