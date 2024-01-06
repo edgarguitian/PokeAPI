@@ -13,23 +13,10 @@ struct PokemonDetailView: View {
     init(viewModel: PokemonDetailViewModel) {
         self.viewModel = viewModel
     }
-    var body: some View {
-        PokemonDetailItemView(pokemon: pokemon)
-    }
-}
-
-#Preview {
-    PokemonDetailFactory().create(with: pokemon)
-}
-
-var pokemon = PokemonListPresentableItem(id: "1", name: "Pikachu", image: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png")!)
-
-struct PokemonDetailItemView: View {
-    let pokemon: PokemonListPresentableItem
     
     var body: some View {
         VStack {
-            AsyncImage(url: pokemon.image) { image in
+            AsyncImage(url: URL(string: viewModel.pokemonDetailInfo.sprites.frontDefault)) { image in
                 image
                     .resizable()
                     .scaledToFill()
@@ -37,11 +24,17 @@ struct PokemonDetailItemView: View {
             } placeholder: {
                 ProgressView()
             }
-            Text("#\(pokemon.id)")
+            Text("#\(viewModel.pokemonDetailInfo.id)")
                 .font(.subheadline)
-            Text(pokemon.name)
+            Text(viewModel.pokemonDetailInfo.name)
                 .font(.callout)
         }
-        .padding(5)
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
+}
+
+#Preview {
+    PokemonDetailFactory().create(pokemonId: "1")
 }

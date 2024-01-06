@@ -9,14 +9,14 @@ import Foundation
 
 struct PokemonSpritesDTO: Decodable {
     let frontDefault: String
-    //let backDefault: String?
-    //let backShiny: String?
-    //let fromShiny: String?
+    let backDefault: String
+    let backShiny: String
+    let frontShiny: String
     
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
-        //case backDefault = "back_default"
-        //case backShiny = "back_shiny"
-        //case fromShiny = "front_shiny"
+        case backDefault = "back_default"
+        case backShiny = "back_shiny"
+        case frontShiny = "front_shiny"
     }
 }

@@ -14,6 +14,7 @@ final class PokemonListViewModel: ObservableObject {
     @Published var showErrorMessage: String?
     @Published var filteredPokemonList: [PokemonListPresentableItem] = []
     var pokemonList: [PokemonListPresentableItem] = []
+    
     init(getPokemonList: GetPokemonListType, errorMapper: PokemonPresentableErrorMapper) {
         self.getPokemonList = getPokemonList
         self.errorMapper = errorMapper

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CreatePokemonDetailView {
-    func create(with pokemon: PokemonListPresentableItem) -> PokemonDetailView
+    func create(pokemonId: String) -> PokemonDetailView
 }

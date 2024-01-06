@@ -30,7 +30,7 @@ struct PokemonListView: View {
                             LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 20) {
                                 ForEach(viewModel.filteredPokemonList, id: \.self) { pokemon in
                                     NavigationLink {
-                                        createPokemonDetailView.create(with: pokemon)
+                                        createPokemonDetailView.create(pokemonId: pokemon.id)
                                     } label: {
                                         PokemonCardView(pokemon: pokemon)
                                     }

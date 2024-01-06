@@ -8,8 +8,6 @@
 import Foundation
 
 class PokemonListRepository: PokemonListRepositoryType {
-    
-    
 
     private let apiDataSource: APIPokemonListDataSourceType
     private let errorMapper: PokemonDomainErrorMapper
@@ -29,15 +27,6 @@ class PokemonListRepository: PokemonListRepositoryType {
         guard case .success(let pokemonListInfo) = pokemonResponse else {
             return .failure(errorMapper.map(error: pokemonResponse.failureValue as? HTTPClientError))
         }
-        
-        
-        /*let pokemonInfoResponse = await apiDataSource.getPokemonListInfo(url: pokemonListInfo.results.first!.url)
-       
-        guard case .success(let pokemonInfoList) = pokemonInfoResponse else {
-            return .failure(errorMapper.map(error: pokemonInfoResponse.failureValue as? HTTPClientError))
-        }
-        
-        let pokemonListDomain = domainMapper.map(infoDTO: pokemonInfoList)*/
         
         var pokemonListDomain: [PokemonListInfo] = []
 
