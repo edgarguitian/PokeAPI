@@ -8,6 +8,6 @@
 import Foundation
 
 struct PokemonListResponseDTO: Decodable {
-    let results: [PokemonEntryDTO]
+    let results: [PokemonNameUrlDTO]
 
 }

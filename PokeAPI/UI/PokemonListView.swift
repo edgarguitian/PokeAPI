@@ -9,10 +9,14 @@ import SwiftUI
 
 struct PokemonListView: View {
     @ObservedObject private var viewModel: PokemonListViewModel
+    private let createPokemonDetailView: CreatePokemonDetailView
+
     @State private var searchPokemon: String = ""
     
-    init(viewModel: PokemonListViewModel) {
+    init(viewModel: PokemonListViewModel,
+         createPokemonDetailView: CreatePokemonDetailView) {
         self.viewModel = viewModel
+        self.createPokemonDetailView = createPokemonDetailView
     }
 
     var body: some View {
@@ -25,7 +29,11 @@ struct PokemonListView: View {
                         ScrollView {
                             LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 20) {
                                 ForEach(viewModel.filteredPokemonList, id: \.self) { pokemon in
-                                    PokemonCardView(pokemon: pokemon)
+                                    NavigationLink {
+                                        createPokemonDetailView.create(with: pokemon)
+                                    } label: {
+                                        PokemonCardView(pokemon: pokemon)
+                                    }
                                 }
                             }
                             .padding(16)

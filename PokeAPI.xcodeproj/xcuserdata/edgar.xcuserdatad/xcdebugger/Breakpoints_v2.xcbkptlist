@@ -104,7 +104,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3D92C62A-17D6-4BF8-B4C8-3C40E9A101D5"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeAPI/Data/Repositories/PokemonListRepository.swift"
@@ -271,6 +271,21 @@
                   endingLineNumber = "48"
                   offsetFromSymbolStart = "288">
                </Location>
+               <Location
+                  uuid = "AAB77CF9-F114-4EA5-89C9-841719CDAEF7 - 3ca1d43c9c3a670e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PokeAPI.APIPokemonListDataSource.getPokemonListInfo(url: Swift.String) async -&gt; Swift.Result&lt;PokeAPI.PokemonListInfoDTO, PokeAPI.HTTPClientError&gt;"
+                  moduleName = "PokeAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPI/Data/Networking/APIPokemonListDataSource.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "284">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -348,6 +363,36 @@
                   startingLineNumber = "51"
                   endingLineNumber = "51"
                   offsetFromSymbolStart = "1076">
+               </Location>
+               <Location
+                  uuid = "3505B6EA-28E5-44FA-9014-F4B8764D12F0 - 3ca1d43c9c3a676d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PokeAPI.APIPokemonListDataSource.getPokemonListInfo(url: Swift.String) async -&gt; Swift.Result&lt;PokeAPI.PokemonListInfoDTO, PokeAPI.HTTPClientError&gt;"
+                  moduleName = "PokeAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPI/Data/Networking/APIPokemonListDataSource.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1700">
+               </Location>
+               <Location
+                  uuid = "3505B6EA-28E5-44FA-9014-F4B8764D12F0 - 3ca1d43c9c3a676d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PokeAPI.APIPokemonListDataSource.getPokemonListInfo(url: Swift.String) async -&gt; Swift.Result&lt;PokeAPI.PokemonListInfoDTO, PokeAPI.HTTPClientError&gt;"
+                  moduleName = "PokeAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPI/Data/Networking/APIPokemonListDataSource.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1744">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -521,10 +566,58 @@
             filePath = "PokeAPI/UI/PokemonListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CDC3ABE-4E24-4B26-A183-1B4C414E9225"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeAPI/UI/PokemonListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "4CDC3ABE-4E24-4B26-A183-1B4C414E9225 - b7d130584ddea4e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.AsyncImage&lt;SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.ProgressView&lt;SwiftUI.EmptyView, SwiftUI.EmptyView&gt;&gt;&gt;, SwiftUI.Text, SwiftUI.Text)&gt; in PokeAPI.PokemonCardView.body.getter : some"
+                  moduleName = "PokeAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPI/UI/PokemonListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "440">
+               </Location>
+               <Location
+                  uuid = "4CDC3ABE-4E24-4B26-A183-1B4C414E9225 - c50d80a7c5e4d9c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftUI.Image) -&gt; &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.AsyncImage&lt;SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.ProgressView&lt;SwiftUI.EmptyView, SwiftUI.EmptyView&gt;&gt;&gt;, SwiftUI.Text, SwiftUI.Text)&gt; in PokeAPI.PokemonCardView.body.getter : some"
+                  moduleName = "PokeAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPI/UI/PokemonListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "152">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

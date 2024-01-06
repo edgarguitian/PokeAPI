@@ -1,13 +1,13 @@
 //
-//  PokemonEntryDTO.swift
+//  PokemonAbilityDTO.swift
 //  PokeAPI
 //
-//  Created by Edgar Guitian Rey on 5/1/24.
+//  Created by Edgar Guitian Rey on 6/1/24.
 //
 
 import Foundation
 
-struct PokemonEntryDTO: Decodable {
+struct PokemonNameUrlDTO: Decodable {
     let name: String
     let url: String
     

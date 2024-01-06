@@ -9,7 +9,7 @@ import Foundation
 
 class PokemonListFactory {
     static func create() -> PokemonListView {
-        return PokemonListView(viewModel: createViewModel())
+        return PokemonListView(viewModel: createViewModel(), createPokemonDetailView: PokemonDetailFactory())
     }
     
     private static func createViewModel() -> PokemonListViewModel {
