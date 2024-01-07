@@ -22,8 +22,7 @@ class PokemonDetailFactory: CreatePokemonDetailView {
     
     private func createRepository() -> SinglePokemonRepositoryType {
         return SinglePokemonRepository(apiDataSource: createAPIDataSource(),
-                                       errorMapper: PokemonDomainErrorMapper(),
-                                       domainMapper: SinglePokemonDomainMapper())
+                                       errorMapper: PokemonDomainErrorMapper())
     }
     
     private func createAPIDataSource() -> APISinglePokemonDataSourceType {

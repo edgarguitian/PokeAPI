@@ -11,14 +11,11 @@ class SinglePokemonRepository: SinglePokemonRepositoryType {
 
     private let apiDataSource: APISinglePokemonDataSourceType
     private let errorMapper: PokemonDomainErrorMapper
-    private let domainMapper: SinglePokemonDomainMapper
     
     init(apiDataSource: APISinglePokemonDataSourceType,
-         errorMapper: PokemonDomainErrorMapper,
-         domainMapper: SinglePokemonDomainMapper) {
+         errorMapper: PokemonDomainErrorMapper) {
         self.apiDataSource = apiDataSource
         self.errorMapper = errorMapper
-        self.domainMapper = domainMapper
     }
     
     func getPokemonInfo(pokemonId: String) async -> Result<SinglePokemonInfo, PokemonDomainError> {
@@ -27,10 +24,8 @@ class SinglePokemonRepository: SinglePokemonRepositoryType {
         guard case .success(let pokemonListInfo) = pokemonResponse else {
             return .failure(errorMapper.map(error: pokemonResponse.failureValue as? HTTPClientError))
         }
-        
-        let pokemonDomain = domainMapper.map(domain: pokemonListInfo)
-       
-        return .success(pokemonDomain)
+               
+        return .success(SinglePokemonInfo(response: pokemonListInfo))
     }
     
 }

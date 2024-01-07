@@ -11,6 +11,16 @@ class PokemonDetailViewModel: ObservableObject {
     @Published var showLoadingSpinner: Bool = false
     @Published var showErrorMessage: String?
     @Published var pokemonDetailInfo: SinglePokemonInfo
+    @Published var isInfoSectionExpanded: Bool = false
+    @Published var isAbilitiesSectionExpanded: Bool = false
+    @Published var isFormsSectionExpanded: Bool = false
+    @Published var isGameIndicesSectionExpanded: Bool = false
+    @Published var isHeldItemsSectionExpanded: Bool = false
+    @Published var isMovesSectionExpanded: Bool = false
+    @Published var isStatsSectionExpanded: Bool = false
+    @Published var isTypesSectionExpanded: Bool = false
+    @Published var isPastTypesSectionExpanded: Bool = false
+    
     let pokemonId: String
     private let getSinglePokemon: GetSinglePokemonType
     private let errorMapper: PokemonPresentableErrorMapper
