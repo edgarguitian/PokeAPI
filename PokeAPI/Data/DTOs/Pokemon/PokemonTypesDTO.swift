@@ -1,5 +1,5 @@
 //
-//  NameUrlDTO.swift
+//  PokemonTypesDTO.swift
 //  PokeAPI
 //
 //  Created by Edgar Guitian Rey on 6/1/24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct NameUrlDTO: Decodable {
-    let name: String
-    let url: String
+struct PokemonTypesDTO: Decodable {
+    let slot: Int
+    let type: NameUrlDTO
     
     enum CodingKeys: String, CodingKey {
-        case name, url
+        case slot, type
     }
 }
