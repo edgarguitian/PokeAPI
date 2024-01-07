@@ -83,7 +83,7 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailFactory().create(pokemonId: "1")
+    PokemonDetailFactory().create(pokemonId: "6")
 }
 
 struct PokemonDetailInfoView: View {
@@ -96,12 +96,9 @@ struct PokemonDetailInfoView: View {
                               value: viewModel.pokemonDetailInfo.height)
         PokemonDetailItemView(title: "Weight",
                               value: viewModel.pokemonDetailInfo.weight)
-        
         PokemonDetailItemView(title: "Location",
                               value: viewModel.pokemonDetailInfo.locationAreaEncounters)
-        
-        PokemonDetailItemView(title: "Specie",
-                              value: viewModel.pokemonDetailInfo.species.name)
+
     }
 }
 
@@ -115,7 +112,7 @@ struct PokemonDetailAbilitiesView: View {
             } label: {
                 VStack(alignment: .leading) {
                     Text(ability.ability.name)
-                        .font(.title3)
+                        .font(.callout)
                 }
             }
 
@@ -133,7 +130,7 @@ struct PokemonDetailFormsView: View {
             } label: {
                 VStack(alignment: .leading) {
                     Text(form.name)
-                        .font(.title3)
+                        .font(.callout)
                 }
             }
 
@@ -150,12 +147,8 @@ struct PokemonDetailGameIndicesView: View {
             NavigationLink {
                 
             } label: {
-                VStack(alignment: .leading) {
-                    Text(gameindice.gameIndex)
-                        .font(.title3)
-                    Text(gameindice.version.name)
-                        .font(.title3)
-                }
+                PokemonDetailItemView(title: gameindice.version.name.capitalizeFirstLetter(),
+                                      value: gameindice.gameIndex)
             }
 
         }
@@ -177,7 +170,7 @@ struct PokemonDetailHeldItemsView: View {
                     } label: {
                         VStack(alignment: .leading) {
                             Text(helditem.item.name)
-                                .font(.title3)
+                                .font(.callout)
                         }
                     }
 
@@ -199,7 +192,7 @@ struct PokemonDetailMovesView: View {
             } label: {
                 VStack(alignment: .leading) {
                     Text(move.move.name)
-                        .font(.title3)
+                        .font(.callout)
                 }
             }
 
@@ -216,14 +209,8 @@ struct PokemonDetailStatsView: View {
             NavigationLink {
                 
             } label: {
-                VStack(alignment: .leading) {
-                    Text(stat.baseStat)
-                        .font(.title3)
-                    Text(stat.effort)
-                        .font(.title3)
-                    Text(stat.stat.name)
-                        .font(.title3)
-                }
+                PokemonDetailItemView(title: stat.stat.name.uppercased(),
+                                      value: stat.baseStat)
             }
 
         }
@@ -240,10 +227,8 @@ struct PokemonDetailTypesView: View {
                 
             } label: {
                 VStack(alignment: .leading) {
-                    Text(type.slot)
-                        .font(.title3)
-                    Text(type.type.name)
-                        .font(.title3)
+                    Text(type.type.name.capitalizeFirstLetter())
+                        .font(.callout)
                 }
             }
 
@@ -261,8 +246,8 @@ struct PokemonDetailPastTypesView: View {
                 
             } label: {
                 VStack(alignment: .leading) {
-                    Text(pasttype.generation.name)
-                        .font(.title3)
+                    Text(pasttype.generation.name.capitalizeFirstLetter())
+                        .font(.callout)
                 }
             }
 
