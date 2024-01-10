@@ -1,13 +1,13 @@
 //
-//  PokeAPIUITestsLaunchTests.swift
-//  PokeAPIUITests
+//  PokeAPIListPokemonsUITestsLaunchTests.swift
+//  PokeAPIListPokemonsUITestsLaunchTests
 //
 //  Created by Edgar Guitian Rey on 8/1/24.
 //
 
 import XCTest
 
-final class PokeAPIUITestsLaunchTests: XCTestCase {
+final class PokeAPIListPokemonsUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

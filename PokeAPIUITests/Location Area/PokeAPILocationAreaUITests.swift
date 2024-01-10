@@ -1,5 +1,5 @@
 //
-//  PokeAPIDetailPokemonUITests.swift
+//  PokeAPILocationAreaUITests.swift
 //  PokeAPIUITests
 //
 //  Created by Edgar Guitian Rey on 10/1/24.
@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class PokeAPIDetailPokemonUITests: XCTestCase {
+final class PokeAPILocationAreaUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

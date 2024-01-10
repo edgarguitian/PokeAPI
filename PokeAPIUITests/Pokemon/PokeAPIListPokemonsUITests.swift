@@ -1,12 +1,12 @@
 //
-//  PokeAPIUITests.swift
-//  PokeAPIUITests
+//  PokeAPIListPokemonsUITests.swift
+//  PokeAPIListPokemonsUITests
 //
 //  Created by Edgar Guitian Rey on 8/1/24.
 //
 
 import XCTest
-final class PokeAPIUITests: XCTestCase {
+final class PokeAPIListPokemonsUITests: XCTestCase {
     private var app: XCUIApplication!
     private let identifierPokemonListGrid = "pokemonListGrid"
     private let identifierPokemonListCard = "pokemonCard_"

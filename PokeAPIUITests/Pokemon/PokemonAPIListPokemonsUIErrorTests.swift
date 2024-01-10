@@ -1,13 +1,13 @@
 //
-//  PokemonAPIUIErrorTests.swift
-//  PokeAPIUITests
+//  PokemonAPIListPokemonsUIErrorTests.swift
+//  PokemonAPIListPokemonsUIErrorTests
 //
 //  Created by Edgar Guitian Rey on 10/1/24.
 //
 
 import XCTest
 
-final class PokemonAPIUIErrorTests: XCTestCase {
+final class PokemonAPIListPokemonsUIErrorTests: XCTestCase {
     private var app: XCUIApplication!
     private let identifierPokemonListGrid = "pokemonListGrid"
     private let identifierPokemonListErrorMessage = "pokemonListErrorMessage"
