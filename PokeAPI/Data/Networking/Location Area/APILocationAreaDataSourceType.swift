@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol APILocationAreaDataSourceType {
+    func getLocationInfo(url: String) async -> Result<LocationAreaDTO, HTTPClientError>
+}

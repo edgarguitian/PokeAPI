@@ -24,7 +24,7 @@ struct PokemonListInfoDTO: Decodable {
     let stats: [PokemonStatsDTO]
     let types: [PokemonTypesDTO]
     let pastTypes: [PokemonPastTypesDTO]
-    
+
     enum CodingKeys: String, CodingKey {
         case id, name, sprites, height, weight, abilities
         case forms, moves, species, types, stats

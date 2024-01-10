@@ -12,7 +12,7 @@ struct PokemonSpritesDTO: Decodable {
     let backDefault: String
     let backShiny: String
     let frontShiny: String
-    
+
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
         case backDefault = "back_default"

@@ -14,20 +14,22 @@ final class PokemonListViewModel: ObservableObject {
     @Published var showErrorMessage: String?
     @Published var filteredPokemonList: [PokemonListPresentableItem] = []
     var pokemonList: [PokemonListPresentableItem] = []
-    
+
     init(getPokemonList: GetPokemonListType, errorMapper: PokemonPresentableErrorMapper) {
         self.getPokemonList = getPokemonList
         self.errorMapper = errorMapper
     }
-    
+
     func onAppear() {
+        let uiTestErrorHandling = ProcessInfo.processInfo.arguments.contains("UITestErrorHandling")
+        showErrorMessage = uiTestErrorHandling ? "Error al cargar la vista en UITest" : nil
         showLoadingSpinner = true
         Task {
             let result = await getPokemonList.execute()
             handleResult(result)
         }
     }
-    
+
     func search(searchPokemon: String) {
         if searchPokemon.isEmpty {
             filteredPokemonList = pokemonList
@@ -38,30 +40,29 @@ final class PokemonListViewModel: ObservableObject {
             }
         }
     }
-    
+
     func handleResult(_ result: Result<PokemonListInfoResponse, PokemonDomainError>) {
         guard case .success(let pokemonListInfo) = result else {
             handleError(error: result.failureValue as? PokemonDomainError)
             return
         }
-        
+
         let pokemonsPresentable = pokemonListInfo.results.map {
             PokemonListPresentableItem(id: String($0.id), name: $0.name.capitalizeFirstLetter(), image: $0.image!)
         }
-        
+
         Task { @MainActor in
             showLoadingSpinner = false
             self.pokemonList = pokemonsPresentable
             self.filteredPokemonList = pokemonsPresentable
         }
     }
-    
+
     private func handleError(error: PokemonDomainError?) {
         Task { @MainActor in
             showLoadingSpinner = false
             showErrorMessage = errorMapper.map(error: error)
         }
     }
-    
-    
+
 }

@@ -11,7 +11,7 @@ struct PokemonStatsDTO: Decodable {
     let baseStat: Int
     let effort: Int
     let stat: NameUrlDTO
-    
+
     enum CodingKeys: String, CodingKey {
         case effort, stat
         case baseStat = "base_stat"

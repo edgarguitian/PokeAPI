@@ -14,5 +14,5 @@ struct PokemonListPresentableItem {
 }
 
 extension PokemonListPresentableItem: Hashable {
-    
+
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - WelcomeElement
+// MARK: - LocationItemInfoDTO
 struct LocationItemInfoDTO: Decodable {
     let locationArea: NameUrlDTO
     let versionDetails: [VersionDetail]
@@ -17,7 +17,6 @@ struct LocationItemInfoDTO: Decodable {
         case versionDetails = "version_details"
     }
 }
-
 
 // MARK: - VersionDetail
 struct VersionDetail: Decodable {
@@ -50,4 +49,3 @@ struct EncounterDetail: Decodable {
 }
 
 typealias LocationListInfoDTO = [LocationItemInfoDTO]
-

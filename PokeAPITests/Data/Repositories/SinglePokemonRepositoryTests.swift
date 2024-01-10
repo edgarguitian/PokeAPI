@@ -6,30 +6,51 @@
 //
 
 import XCTest
+@testable import PokeAPI
 
 final class SinglePokemonRepositoryTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func test_getPokemonInfo_return_success() async throws {
+        // GIVEN
+        let apiDataSource = APISinglePokemonDataSourceStub(pokemonList: .success(PokemonListInfoDTO.makePokemonListInfo()))
+        let sut = SinglePokemonRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
+        
+        // WHEN
+        let result = await sut.getPokemonInfo(pokemonId: "1")
+        
+        // THEN
+        let singlePokemon = try XCTUnwrap(result.get())
+        XCTAssertEqual(singlePokemon, SinglePokemonInfo.makeSinglePokemonInfo())
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_getPokemonInfo_returns_failure_when_apiDataSource_fails_ongetPokemonInfo() async throws {
+        // GIVEN
+        let apiDataSource = APISinglePokemonDataSourceStub(pokemonList: .failure(.clientError))
+        let sut = SinglePokemonRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
+        
+        // WHEN
+        let result = await sut.getPokemonInfo(pokemonId: "1")
+        
+        // THEN
+        guard case .failure(let error) = result else {
+            XCTFail("Expected failure, got success")
+            return
         }
+
+        XCTAssertEqual(error, PokemonDomainError.generic)
     }
 
+}
+
+private extension PokemonListInfoDTO {
+    static func makePokemonListInfo() -> PokemonListInfoDTO{
+        return PokemonListInfoDTO(id: 1, name: "test name 1", baseExperience: 64, height: 100, weight: 2, abilities: [], forms: [], gameIndices: [], heldItems: [], locationAreaEncounters: "test pokemonListInfoDTO locationareancounters", moves: [], species: NameUrlDTO(name: "test species name", url: "test species url"), sprites: PokemonSpritesDTO(frontDefault: "test pokemonListInfoDTO frontdefault", backDefault: "", backShiny: "", frontShiny: ""), stats: [], types: [], pastTypes: [])
+    }
+}
+
+private extension SinglePokemonInfo {
+    static func makeSinglePokemonInfo() -> SinglePokemonInfo {
+        return SinglePokemonInfo(id: "1", name: "test name 1", baseExperience: "64", height: "100", weight: "2", abilities: [], forms: [], gameIndices: [], heldItems: [], locationAreaEncounters: "test pokemonListInfoDTO locationareancounters", moves: [], species: PokemonNameUrl(name: "test species name", url: "test species url"), sprites: PokemonSprites(frontDefault: "test pokemonListInfoDTO frontdefault", backDefault: "", backShiny: "", frontShiny: ""), stats: [], types: [], pastTypes: [])
+    }
 }

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class Constants {
+    static let shared = Constants()
+
+    let numPokemons: Int = 6
+}

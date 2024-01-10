@@ -6,30 +6,48 @@
 //
 
 import XCTest
+@testable import PokeAPI
 
 final class GetSingleLocationTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func test_execute_sucesfully_returns_single_location() async throws {
+        // GIVEN
+        let mockArray = [
+          NameUrl(name: "Test Location NameURL Name 1", url: "Test Location NameURL URL 1"),
+          NameUrl(name: "Test Location NameURL Name 2", url: "Test Location NameURL URL 2"),
+          NameUrl(name: "Test Location NameURL Name 3", url: "Test Location NameURL URL 3")
+        ]
+        let mockResult = SingleLocationInfo(values: mockArray)
+        
+        let result: Result<SingleLocationInfo, PokemonDomainError> = .success(mockResult)
+        let stub = SingleLocationRepositoryStub(result: result)
+        let sut = GetSingleLocation(repository: stub)
+        
+        // WHEN
+        let capturedResult = await sut.execute(url: "https://pokeapi.co/api/v2/pokemon/1/encounters")
+        
+        // THEN
+        let capturedSingleLocation = try XCTUnwrap(capturedResult.get())
+        XCTAssertEqual(capturedSingleLocation.values.count, 3)
+        XCTAssertEqual(capturedSingleLocation.values[0], mockArray[0])
+        XCTAssertEqual(capturedSingleLocation.values[1], mockArray[1])
+        XCTAssertEqual(capturedSingleLocation.values[2], mockArray[2])
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    }
+    
+    func test_execute_returns_error_when_repository_returns_error() async {
+        // GIVEN
+        let result: Result<SingleLocationInfo, PokemonDomainError> = .failure(.generic)
+        let stub = SingleLocationRepositoryStub(result: result)
+        let sut = GetSingleLocation(repository: stub)
+        
+        // WHEN
+        let capturedResult = await sut.execute(url: "https://pokeapi.co/api/v2/pokemon/1/encounters")
+
+        // THEN
+        XCTAssertEqual(capturedResult, result)
     }
 
 }

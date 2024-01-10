@@ -10,7 +10,7 @@ import Foundation
 struct PokemonTypesDTO: Decodable {
     let slot: Int
     let type: NameUrlDTO
-    
+
     enum CodingKeys: String, CodingKey {
         case slot, type
     }

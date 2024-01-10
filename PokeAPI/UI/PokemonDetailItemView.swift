@@ -24,7 +24,6 @@ struct PokemonDetailItemView: View {
 
         }
         .padding()
-        .background(Color("BackgroundItemColor"))
         .cornerRadius(10)
     }
 }

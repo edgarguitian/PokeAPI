@@ -8,33 +8,26 @@
 import Foundation
 
 struct SingleLocationInfo {
-    let name: [String]
-    let url: [String]
-    
-    init(name: [String], url: [String]) {
-        self.name = name
-        self.url = url
+    let values: [NameUrl]
+
+    init(values: [NameUrl]) {
+        self.values = values
     }
-    
+
     init() {
-        self.name = []
-        self.url = []
+        self.values = []
     }
-    
+
     init(response: LocationListInfoDTO) {
         if response.count > 0 {
-            var names: [String] = []
-            var urls: [String] = []
+            var values: [NameUrl] = []
             for element in response {
-                names.append(element.locationArea.name)
-                urls.append(element.locationArea.url)
+                values.append(NameUrl(name: element.locationArea.name, url: element.locationArea.url))
             }
-            self.name = names
-            self.url = urls
+            self.values = values
         } else {
-            self.name = []
-            self.url = []
+            self.values = []
         }
-        
+
     }
 }

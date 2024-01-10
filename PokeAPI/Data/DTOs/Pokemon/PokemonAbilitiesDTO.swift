@@ -11,6 +11,7 @@ struct PokemonAbilitiesDTO: Decodable {
     let isHidden: Bool
     let slot: Int
     let ability: NameUrlDTO
+
     enum CodingKeys: String, CodingKey {
         case isHidden = "is_hidden"
         case slot, ability

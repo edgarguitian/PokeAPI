@@ -6,30 +6,89 @@
 //
 
 import XCTest
+@testable import PokeAPI
 
 final class LocationAreaRepositoryTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func test_getLocationArea_returns_success_with_one_item_when_there_is_one_location() async throws {
+        // GIVEN
+        let apiDataSource = APILocationAreaDataSourceStub(locationList: .success(LocationAreaDTO.makeLocationArea()))
+        let sut = LocationAreaRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+        // WHEN
+        let result = await sut.getLocationArea(url: "https://pokeapi.co/api/v2/location-area/1/")
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
+        // THEN
+        let singleLocation = try XCTUnwrap(result.get())
+        XCTAssertEqual(singleLocation, LocationAreaInfo.makeLocationAreaInfo())
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    }
+    
+    func test_getLocationArea_returns_failure_when_apiDataSource_fails_ongetLocationArea() async throws {
+        // GIVEN
+        let apiDataSource = APILocationAreaDataSourceStub(locationList: .failure(.clientError))
+        let sut = LocationAreaRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
+        
+        // WHEN
+        let result = await sut.getLocationArea(url: "https://pokeapi.co/api/v2/location-area/1/")
+        
+        // THEN
+        guard case .failure(let error) = result else {
+            XCTFail("Expected failure, got success")
+            return
         }
+
+        XCTAssertEqual(error, PokemonDomainError.generic)
     }
 
+
+}
+
+private extension LocationAreaDTO {
+    static func makeLocationArea() -> LocationAreaDTO {
+        return LocationAreaDTO(id: 1,
+                               name: "test location area name",
+                               encounterMethodRates: [EncounterMethodRatesDTO(encounterMethod: NameUrlDTO(name: "test locationarea encountermethod name", url: "test locationarea encountermethod url"), versionDetails: [VersionDetailsDTO(rate: 1, version: NameUrlDTO(name: "testlocationarea versiondetails version name", url: "testlocationarea versiondetails version url"))])],
+                               location: NameUrlDTO(name: "test locationarea location name", url:  "test locationarea location url"),
+                               names: [NamesDTO(name: "test locationarea names name", language: NameUrlDTO(name: "test locationarea names language name", url: "test locationarea names language url"))],
+                               pokemonEncounters: [PokemonEncountersDTO(pokemon: NameUrlDTO(name: "test locationarea pokemonencounters pokemon name", url: "test locationarea pokemonencounters pokemon url"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 2, conditionValues: [NameUrlDTO(name: "test locationarea conditionvalues name", url: "test locationarea conditionvalues name")], maxLevel: 3, method: NameUrlDTO(name: "testlocationarea method name", url: "testlocationarea method url"), minLevel: 4)], maxChance: 5, version: NameUrlDTO(name: "test locationarea version name", url: "test locationarea version url"))])]
+        )
+    }
+}
+
+private extension LocationAreaInfo {
+    static func makeLocationAreaInfo() -> LocationAreaInfo {
+        return LocationAreaInfo(id: "1",
+                                name: "test location area name",
+                                encounterMethodRates: [EncounterMethodRates(
+                                    encounterMethod: NameUrl(name: "test locationarea encountermethod name",
+                                                             url: "test locationarea encountermethod url"),
+                                    versionDetails: [
+                                        VersionDetailsEncounter(rate: "1",
+                                                                version: NameUrl(name: "testlocationarea versiondetails version name",
+                                                                                 url: "testlocationarea versiondetails version url"))
+                                    ])],
+                                location: NameUrl(name: "test locationarea location name", url:  "test locationarea location url"),
+                                names: [Names(name: "test locationarea names name",
+                                              language: NameUrl(name: "test locationarea names language name",
+                                                                url: "test locationarea names language url"))],
+                                pokemonEncounters: [PokemonEncounters(
+                                    pokemon: NameUrl(name: "test locationarea pokemonencounters pokemon name",
+                                                     url: "test locationarea pokemonencounters pokemon url"),
+                                    versionDetails: [
+                                        VersionDetails(
+                                            encounterDetails: [EncounterDetailArea(chance: "2",
+                                                                                   conditionValues: [NameUrl(name: "test locationarea conditionvalues name",
+                                                                                                             url: "test locationarea conditionvalues name")],
+                                                                                   maxLevel: "3",
+                                                                                   method: NameUrl(name: "testlocationarea method name",
+                                                                                                   url: "testlocationarea method url"),
+                                                                                   minLevel: "4")],
+                                            maxChance: "5",
+                                            version: NameUrl(name: "test locationarea version name",
+                                                             url: "test locationarea version url")
+                                        )
+                                    ])
+                                ])
+    }
 }

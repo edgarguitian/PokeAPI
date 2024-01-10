@@ -9,8 +9,4 @@ import Foundation
 
 struct PokemonListResponse {
     let results: [PokemonEntry]
-    
-    init(results: [PokemonEntry]) {
-        self.results = results
-    }
 }

@@ -11,10 +11,4 @@ struct PokemonListInfo {
     let id: String
     let name: String
     let image: URL?
-    
-    init(id: String, name: String, image: URL?) {
-        self.id = id
-        self.name = name
-        self.image = image
-    }
 }

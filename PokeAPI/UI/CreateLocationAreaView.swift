@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol CreateLocationAreaView {
+    func create(url: String) -> LocationAreaView
+}

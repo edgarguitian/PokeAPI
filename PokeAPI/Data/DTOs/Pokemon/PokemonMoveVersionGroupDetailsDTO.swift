@@ -11,7 +11,7 @@ struct PokemonMoveVersionGroupDetailsDTO: Decodable {
     let levelLearnedAt: Int
     let versionGroup: NameUrlDTO
     let moveLearnMethod: NameUrlDTO
-    
+
     enum CodingKeys: String, CodingKey {
         case levelLearnedAt = "level_learned_at"
         case versionGroup = "version_group"

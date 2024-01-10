@@ -6,30 +6,82 @@
 //
 
 import XCTest
+@testable import PokeAPI
 
 final class SingleLocationRepositoryTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func test_getLocationInfo_returns_success_with_one_item_when_there_is_one_location() async throws {
+        // GIVEN
+        let apiDataSource = APISingleLocationDataSourceStub(locationList: .success(LocationListInfoDTO.makeLocationListInfo()))
+        let sut = SingleLocationRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+        // WHEN
+        let result = await sut.getLocationInfo(url: "https://pokeapi.co/api/v2/pokemon/35/encounters")
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
+        // THEN
+        let singleLocation = try XCTUnwrap(result.get())
+        XCTAssertEqual(singleLocation, SingleLocationInfo.makeSingleLocationInfo())
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    }
+    
+    func test_getLocationInfo_returns_success_with_three_items_when_there_are_three_locations() async throws {
+        // GIVEN
+        let apiDataSource = APISingleLocationDataSourceStub(locationList: .success(LocationListInfoDTO.makeLocationListInfoThree()))
+        let sut = SingleLocationRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
+
+        // WHEN
+        let result = await sut.getLocationInfo(url: "https://pokeapi.co/api/v2/pokemon/35/encounters")
+
+        // THEN
+        let singleLocation = try XCTUnwrap(result.get())
+        XCTAssertEqual(singleLocation, SingleLocationInfo.makeSingleLocationInfoThree())
+
+    }
+    
+    func test_getLocationInfo_returns_failure_when_apiDataSource_fails_ongetLocationInfo() async throws {
+        // GIVEN
+        let apiDataSource = APISingleLocationDataSourceStub(locationList: .failure(.clientError))
+        let sut = SingleLocationRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
+        
+        // WHEN
+        let result = await sut.getLocationInfo(url: "https://pokeapi.co/api/v2/pokemon/35/encounters")
+        
+        // THEN
+        guard case .failure(let error) = result else {
+            XCTFail("Expected failure, got success")
+            return
         }
+
+        XCTAssertEqual(error, PokemonDomainError.generic)
     }
 
+}
+
+private extension LocationListInfoDTO {
+    static func makeLocationListInfo() -> [LocationItemInfoDTO] {
+        return [LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 1", url: "test locationArea url 1"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))])]
+    }
+    
+    static func makeLocationListInfoThree() -> [LocationItemInfoDTO] {
+        return [
+            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 1", url: "test locationArea url 1"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))]),
+            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 2", url: "test locationArea url 2"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))]),
+            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 3", url: "test locationArea url 3"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))])
+        
+        ]
+    }
+}
+
+private extension SingleLocationInfo {
+    static func makeSingleLocationInfo() -> SingleLocationInfo {
+        return SingleLocationInfo(values: [NameUrl(name: "test locationArea name 1", url: "test locationArea url 1")])
+    }
+    
+    static func makeSingleLocationInfoThree() -> SingleLocationInfo {
+        return SingleLocationInfo(values: [
+            NameUrl(name: "test locationArea name 1", url: "test locationArea url 1"),
+            NameUrl(name: "test locationArea name 2", url: "test locationArea url 2"),
+            NameUrl(name: "test locationArea name 3", url: "test locationArea url 3")
+        ])
+    }
 }

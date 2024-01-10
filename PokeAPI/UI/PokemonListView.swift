@@ -12,7 +12,7 @@ struct PokemonListView: View {
     private let createPokemonDetailView: CreatePokemonDetailView
 
     @State private var searchPokemon: String = ""
-    
+
     init(viewModel: PokemonListViewModel,
          createPokemonDetailView: CreatePokemonDetailView) {
         self.viewModel = viewModel
@@ -34,8 +34,10 @@ struct PokemonListView: View {
                                     } label: {
                                         PokemonCardView(pokemon: pokemon)
                                     }
+                                    .accessibilityIdentifier("pokemonListLink")
                                 }
                             }
+                            .accessibilityIdentifier("pokemonListGrid")
                             .padding(16)
                         }
                         .navigationTitle("Pokemons")
@@ -46,6 +48,7 @@ struct PokemonListView: View {
                     }
                 } else {
                     Text(viewModel.showErrorMessage!)
+                        .accessibilityIdentifier("pokemonListErrorMessage")
                 }
             }
         }
@@ -57,7 +60,7 @@ struct PokemonListView: View {
 
 struct PokemonCardView: View {
     let pokemon: PokemonListPresentableItem
-    
+
     var body: some View {
         VStack {
             AsyncImage(url: pokemon.image) { image in
@@ -77,6 +80,8 @@ struct PokemonCardView: View {
         .background(Color.pokemonListBackground)
         .cornerRadius(10)
         .shadow(radius: 3)
+        .accessibility(identifier: "pokemonCard_\(pokemon.id)")
+
     }
 }
 

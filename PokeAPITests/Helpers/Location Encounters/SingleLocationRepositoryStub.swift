@@ -6,3 +6,18 @@
 //
 
 import Foundation
+@testable import PokeAPI
+
+class SingleLocationRepositoryStub: SingleLocationRepositoryType {
+
+    private let result: Result<SingleLocationInfo, PokemonDomainError>
+
+    init(result: Result<SingleLocationInfo, PokemonDomainError>) {
+        self.result = result
+    }
+    
+    func getLocationInfo(url: String) async -> Result<SingleLocationInfo, PokemonDomainError> {
+        return result
+    }
+    
+}

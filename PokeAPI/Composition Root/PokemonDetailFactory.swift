@@ -9,30 +9,46 @@ import Foundation
 
 class PokemonDetailFactory: CreatePokemonDetailView {
     func create(pokemonId: String) -> PokemonDetailView {
-        return PokemonDetailView(viewModel: createViewModel(pokemonId: pokemonId))
+        return PokemonDetailView(viewModel: createViewModel(pokemonId: pokemonId),
+                                 createLocationAreaView: LocationAreaFactory())
     }
-    
+
     func createViewModel(pokemonId: String) -> PokemonDetailViewModel {
-        return PokemonDetailViewModel(pokemonId: pokemonId, getSinglePokemon: createUseCase(), errorMapper: PokemonPresentableErrorMapper())
+        return PokemonDetailViewModel(pokemonId: pokemonId,
+                                      getSinglePokemon: createPokemonUseCase(),
+                                      getSingleLocation: createLocationUseCase(),
+                                      errorMapper: PokemonPresentableErrorMapper())
     }
-    
-    private func createUseCase() -> GetSinglePokemonType {
+
+    private func createPokemonUseCase() -> GetSinglePokemonType {
         return GetSinglePokemon(repository: createRepository())
     }
-    
+
     private func createRepository() -> SinglePokemonRepositoryType {
-        return SinglePokemonRepository(apiDataSource: createAPIDataSource(),
+        return SinglePokemonRepository(apiDataSource: createAPIPokemonDataSource(),
                                        errorMapper: PokemonDomainErrorMapper())
     }
-    
-    private func createAPIDataSource() -> APISinglePokemonDataSourceType {
+
+    private func createAPIPokemonDataSource() -> APISinglePokemonDataSourceType {
         return APISinglePokemonDataSource(httpClient: PokemonDetailFactory.createHTTPClient())
     }
-    
+
     private static func createHTTPClient() -> HTTPClient {
         return URLSessionHTTPCLient(requestMaker: URLSessionRequestMaker(),
                                     errorResolver: URLSessionErrorResolver())
     }
-    
-    
+
+    private func createLocationUseCase() -> GetSingleLocationType {
+        return GetSingleLocation(repository: createLocationRepository())
+    }
+
+    private func createLocationRepository() -> SingleLocationRepositoryType {
+        return SingleLocationRepository(apiDataSource: createAPILocationDataSource(),
+                                       errorMapper: PokemonDomainErrorMapper())
+    }
+
+    private func createAPILocationDataSource() -> APISingleLocationDataSourceType {
+        return APISingleLocationDataSource(httpClient: PokemonDetailFactory.createHTTPClient())
+    }
+
 }

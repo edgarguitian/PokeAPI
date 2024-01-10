@@ -9,11 +9,24 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     @ObservedObject private var viewModel: PokemonDetailViewModel
+    private let createLocationAreaView: CreateLocationAreaView
 
-    init(viewModel: PokemonDetailViewModel) {
+    @State var isInfoSectionExpanded: Bool = false
+    @State var isInfoLocationsExpanded: Bool = false
+    @State var isAbilitiesSectionExpanded: Bool = false
+    @State var isFormsSectionExpanded: Bool = false
+    @State var isGameIndicesSectionExpanded: Bool = false
+    @State var isHeldItemsSectionExpanded: Bool = false
+    @State var isMovesSectionExpanded: Bool = false
+    @State var isStatsSectionExpanded: Bool = false
+    @State var isTypesSectionExpanded: Bool = false
+    @State var isPastTypesSectionExpanded: Bool = false
+
+    init(viewModel: PokemonDetailViewModel, createLocationAreaView: CreateLocationAreaView) {
         self.viewModel = viewModel
+        self.createLocationAreaView = createLocationAreaView
     }
-    
+
     var body: some View {
         VStack {
             if viewModel.showLoadingSpinner {
@@ -29,43 +42,55 @@ struct PokemonDetailView: View {
                         } placeholder: {
                             ProgressView()
                         }
-                        
-                        DisclosureGroup("Info", isExpanded: $viewModel.isInfoSectionExpanded) {
-                                                    PokemonDetailInfoView(viewModel: viewModel)
-                                                }
-                        
-                        DisclosureGroup("Abilities", isExpanded: $viewModel.isAbilitiesSectionExpanded) {
-                                                    PokemonDetailAbilitiesView(viewModel: viewModel)
-                                                }
-                        
-                        DisclosureGroup("Forms", isExpanded: $viewModel.isFormsSectionExpanded) {
-                                                    PokemonDetailFormsView(viewModel: viewModel)
-                                                }
-                        
-                        DisclosureGroup("Game Indices", isExpanded: $viewModel.isGameIndicesSectionExpanded) {
+                        .accessibilityIdentifier("pokemonDetailImage")
+
+                        disclosureGroup(label: "Info", isExpanded: $isInfoSectionExpanded) {
+                            PokemonDetailInfoView(viewModel: viewModel)
+                        }
+
+                        if !viewModel.locationDetailInfo.values.isEmpty {
+
+                            disclosureGroup(label: "Locations", isExpanded: $isInfoLocationsExpanded) {
+                                PokemonDetailLocationsView(viewModel: viewModel,
+                                                           createLocationAreaView: createLocationAreaView)
+                            }
+
+                        }
+
+                        disclosureGroup(label: "Abilities", isExpanded: $isAbilitiesSectionExpanded) {
+                            PokemonDetailAbilitiesView(viewModel: viewModel)
+                        }
+
+                        disclosureGroup(label: "Forms", isExpanded: $isFormsSectionExpanded) {
+                            PokemonDetailFormsView(viewModel: viewModel)
+                        }
+
+                        disclosureGroup(label: "Game Indices", isExpanded: $isGameIndicesSectionExpanded) {
                             PokemonDetailGameIndicesView(viewModel: viewModel)
                         }
 
                         if !viewModel.pokemonDetailInfo.heldItems.isEmpty {
-                            DisclosureGroup("Held Items", isExpanded: $viewModel.isHeldItemsSectionExpanded) {
+
+                            disclosureGroup(label: "Held Items", isExpanded: $isHeldItemsSectionExpanded) {
                                 PokemonDetailHeldItemsView(viewModel: viewModel)
                             }
                         }
 
-                        DisclosureGroup("Moves", isExpanded: $viewModel.isMovesSectionExpanded) {
+                        disclosureGroup(label: "Moves", isExpanded: $isMovesSectionExpanded) {
                             PokemonDetailMovesView(viewModel: viewModel)
                         }
 
-                        DisclosureGroup("Stats", isExpanded: $viewModel.isStatsSectionExpanded) {
+                        disclosureGroup(label: "Stats", isExpanded: $isStatsSectionExpanded) {
                             PokemonDetailStatsView(viewModel: viewModel)
                         }
 
-                        DisclosureGroup("Types", isExpanded: $viewModel.isTypesSectionExpanded) {
+                        disclosureGroup(label: "Types", isExpanded: $isTypesSectionExpanded) {
                             PokemonDetailTypesView(viewModel: viewModel)
                         }
 
                         if !viewModel.pokemonDetailInfo.pastTypes.isEmpty {
-                            DisclosureGroup("Past Types", isExpanded: $viewModel.isPastTypesSectionExpanded) {
+
+                            disclosureGroup(label: "Past Types", isExpanded: $isPastTypesSectionExpanded) {
                                 PokemonDetailPastTypesView(viewModel: viewModel)
                             }
                         }
@@ -76,10 +101,31 @@ struct PokemonDetailView: View {
             }
         }
         .navigationTitle("Nº. \(viewModel.pokemonDetailInfo.id) " + viewModel.pokemonDetailInfo.name)
+        .accessibilityIdentifier("pokemonDetailView")
         .onAppear {
             viewModel.onAppear()
         }
     }
+
+    private func disclosureGroup<Content: View>(label: String,
+                                                isExpanded: Binding<Bool>,
+                                                @ViewBuilder content: @escaping () -> Content) -> some View {
+        DisclosureGroup(isExpanded: isExpanded) {
+            content()
+        } label: {
+            Button(action: {
+                withAnimation {
+                    isExpanded.wrappedValue.toggle()
+                }
+            }, label: {
+                Text(label)
+                    .foregroundColor(.primary)
+            })
+            .accessibilityIdentifier("collapsePokemonDetail\(label.replacingOccurrences(of: " ", with: ""))")
+            .foregroundColor(.primary)
+        }
+    }
+
 }
 
 #Preview {
@@ -92,12 +138,34 @@ struct PokemonDetailInfoView: View {
     var body: some View {
         PokemonDetailItemView(title: "Base Experience",
                               value: viewModel.pokemonDetailInfo.baseExperience)
+        .accessibilityIdentifier("pokemonDetailBaseExperience")
         PokemonDetailItemView(title: "Height",
                               value: viewModel.pokemonDetailInfo.height)
+        .accessibilityIdentifier("pokemonDetailHeight")
         PokemonDetailItemView(title: "Weight",
                               value: viewModel.pokemonDetailInfo.weight)
-        PokemonDetailItemView(title: "Location",
-                              value: viewModel.pokemonDetailInfo.locationAreaEncounters)
+        .accessibilityIdentifier("pokemonDetailWeight")
+
+    }
+}
+
+struct PokemonDetailLocationsView: View {
+    @ObservedObject var viewModel: PokemonDetailViewModel
+    let createLocationAreaView: CreateLocationAreaView
+
+    var body: some View {
+        ForEach(viewModel.locationDetailInfo.values, id: \.self) { value in
+            NavigationLink {
+                createLocationAreaView.create(url: value.url)
+            } label: {
+                VStack(alignment: .leading) {
+                    Text(value.name)
+                        .font(.callout)
+                        .accessibilityIdentifier("pokemonDetailLocation")
+                }
+            }
+
+        }
 
     }
 }
@@ -108,11 +176,12 @@ struct PokemonDetailAbilitiesView: View {
     var body: some View {
         ForEach(viewModel.pokemonDetailInfo.abilities, id: \.self) { ability in
             NavigationLink {
-                
+
             } label: {
                 VStack(alignment: .leading) {
                     Text(ability.ability.name)
                         .font(.callout)
+                        .accessibilityIdentifier("pokemonDetailAbility")
                 }
             }
 
@@ -126,16 +195,18 @@ struct PokemonDetailFormsView: View {
     var body: some View {
         ForEach(viewModel.pokemonDetailInfo.forms, id: \.self) { form in
             NavigationLink {
-                
+
             } label: {
                 VStack(alignment: .leading) {
                     Text(form.name)
                         .font(.callout)
+                        .accessibilityIdentifier("pokemonDetailForm")
+
                 }
             }
 
         }
-        
+
     }
 }
 
@@ -145,10 +216,11 @@ struct PokemonDetailGameIndicesView: View {
     var body: some View {
         ForEach(viewModel.pokemonDetailInfo.gameIndices, id: \.self) { gameindice in
             NavigationLink {
-                
+
             } label: {
                 PokemonDetailItemView(title: gameindice.version.name.capitalizeFirstLetter(),
                                       value: gameindice.gameIndex)
+                .accessibilityIdentifier("pokemonDetailGameIndice")
             }
 
         }
@@ -166,7 +238,7 @@ struct PokemonDetailHeldItemsView: View {
             ) {
                 ForEach(viewModel.pokemonDetailInfo.heldItems, id: \.self) { helditem in
                     NavigationLink {
-                        
+
                     } label: {
                         VStack(alignment: .leading) {
                             Text(helditem.item.name)
@@ -175,10 +247,10 @@ struct PokemonDetailHeldItemsView: View {
                     }
 
                 }
-                
+
             }
         }
-        
+
     }
 }
 
@@ -188,16 +260,18 @@ struct PokemonDetailMovesView: View {
     var body: some View {
         ForEach(viewModel.pokemonDetailInfo.moves, id: \.self) { move in
             NavigationLink {
-                
+
             } label: {
                 VStack(alignment: .leading) {
                     Text(move.move.name)
                         .font(.callout)
+                        .accessibilityIdentifier("pokemonDetailMove")
+
                 }
             }
 
         }
-        
+
     }
 }
 
@@ -207,14 +281,16 @@ struct PokemonDetailStatsView: View {
     var body: some View {
         ForEach(viewModel.pokemonDetailInfo.stats, id: \.self) { stat in
             NavigationLink {
-                
+
             } label: {
                 PokemonDetailItemView(title: stat.stat.name.uppercased(),
                                       value: stat.baseStat)
+                .accessibilityIdentifier("pokemonDetailStat")
+
             }
 
         }
-        
+
     }
 }
 
@@ -224,16 +300,17 @@ struct PokemonDetailTypesView: View {
     var body: some View {
         ForEach(viewModel.pokemonDetailInfo.types, id: \.self) { type in
             NavigationLink {
-                
+
             } label: {
                 VStack(alignment: .leading) {
                     Text(type.type.name.capitalizeFirstLetter())
                         .font(.callout)
+                        .accessibilityIdentifier("pokemonDetailType")
+
                 }
             }
-
         }
-        
+
     }
 }
 
@@ -243,7 +320,7 @@ struct PokemonDetailPastTypesView: View {
     var body: some View {
         ForEach(viewModel.pokemonDetailInfo.pastTypes, id: \.self) { pasttype in
             NavigationLink {
-                
+
             } label: {
                 VStack(alignment: .leading) {
                     Text(pasttype.generation.name.capitalizeFirstLetter())
@@ -252,6 +329,6 @@ struct PokemonDetailPastTypesView: View {
             }
 
         }
-        
+
     }
 }

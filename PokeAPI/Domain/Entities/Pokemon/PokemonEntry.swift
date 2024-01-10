@@ -11,10 +11,4 @@ struct PokemonEntry {
     let id: Int
     var name: String
     var url: URL?
-    
-    init(id: Int, name: String, url: URL?) {
-        self.id = id
-        self.name = name
-        self.url = url
-    }
 }

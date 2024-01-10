@@ -10,7 +10,7 @@ import Foundation
 struct PokemonHeldItemsDTO: Decodable {
     let item: NameUrlDTO
     let versionDetails: [PokemonHeldItemVersionDetailsDTO]
-    
+
     enum CodingKeys: String, CodingKey {
         case item
         case versionDetails = "version_details"

@@ -10,7 +10,7 @@ import Foundation
 struct PokemonGameIndicesDTO: Decodable {
     let gameIndex: Int
     let version: NameUrlDTO
-    
+
     enum CodingKeys: String, CodingKey {
         case gameIndex = "game_index"
         case version

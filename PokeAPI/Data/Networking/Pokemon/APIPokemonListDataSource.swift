@@ -9,14 +9,14 @@ import Foundation
 
 class APIPokemonListDataSource: APIPokemonListDataSourceType {
     private let httpClient: HTTPClient
-    
+
     init(httpClient: HTTPClient) {
         self.httpClient = httpClient
     }
-    
+
     func getPokemonList() async -> Result<PokemonListResponseDTO, HTTPClientError> {
         let queryParameters: [String: Any] = [
-            "limit": 6
+            "limit": Constants.shared.numPokemons
         ]
 
         let endpoint = Endpoint(path: "pokemon",
@@ -34,7 +34,7 @@ class APIPokemonListDataSource: APIPokemonListDataSourceType {
         }
         return .success(pokemonListResponse)
     }
-    
+
     func getPokemonListInfo(url: String) async -> Result<PokemonListInfoDTO, HTTPClientError> {
         let queryParameters: [String: Any] = [:]
 
@@ -52,7 +52,7 @@ class APIPokemonListDataSource: APIPokemonListDataSourceType {
         }
         return .success(pokemonListInfoResponse)
     }
-    
+
     private func handleError(error: HTTPClientError?) -> HTTPClientError {
         guard let error = error else {
             return .generic

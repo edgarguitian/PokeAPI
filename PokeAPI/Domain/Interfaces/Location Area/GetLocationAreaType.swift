@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol GetLocationAreaType {
+    func execute(url: String) async -> Result<LocationAreaInfo, PokemonDomainError>
+}
