@@ -549,8 +549,8 @@
             filePath = "PokeAPI/UI/PokemonListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -979,6 +979,118 @@
             endingLineNumber = "65"
             landmarkName = "test_press_on_first_pokemon_and_check_exist_info()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "821774CE-0623-4ED4-9BB1-259AD01C359E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeAPIUITests/Pokemon/PokeAPIListPokemonsUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "test_count_num_pokemons_on_list()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "821774CE-0623-4ED4-9BB1-259AD01C359E - d99abe6e7e6886e3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeAPIUITests.PokeAPIListPokemonsUITests.test_count_num_pokemons_on_list() -&gt; ()"
+                  moduleName = "PokeAPIUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPIUITests/Pokemon/PokeAPIListPokemonsUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "1704">
+               </Location>
+               <Location
+                  uuid = "821774CE-0623-4ED4-9BB1-259AD01C359E - d99abe6e7e6886a5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeAPIUITests.PokeAPIListPokemonsUITests.test_count_num_pokemons_on_list() -&gt; ()"
+                  moduleName = "PokeAPIUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPIUITests/Pokemon/PokeAPIListPokemonsUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "1376">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51DB9F84-652C-41E9-82C9-87881988364C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeAPIUITests/Pokemon/PokeAPIListPokemonsUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "test_count_num_pokemons_on_list()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "062F0DB8-EE69-4B68-94D8-94BCA02B6F29"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeAPIUITests/Pokemon/PokeAPIListPokemonsUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "test_count_num_pokemons_on_list()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "062F0DB8-EE69-4B68-94D8-94BCA02B6F29 - d99abe6e7e688721"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeAPIUITests.PokeAPIListPokemonsUITests.test_count_num_pokemons_on_list() -&gt; ()"
+                  moduleName = "PokeAPIUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPIUITests/Pokemon/PokeAPIListPokemonsUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "1792">
+               </Location>
+               <Location
+                  uuid = "062F0DB8-EE69-4B68-94D8-94BCA02B6F29 - d99abe6e7e688702"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokeAPIUITests.PokeAPIListPokemonsUITests.test_count_num_pokemons_on_list() -&gt; ()"
+                  moduleName = "PokeAPIUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edgar/Documents/PokeAPI/PokeAPIUITests/Pokemon/PokeAPIListPokemonsUITests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "1744">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

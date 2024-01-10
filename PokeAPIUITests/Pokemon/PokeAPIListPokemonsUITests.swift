@@ -8,6 +8,7 @@
 import XCTest
 final class PokeAPIListPokemonsUITests: XCTestCase {
     private var app: XCUIApplication!
+    private let scrollPokemonsIdentifier = "scrollPokemons"
     private let identifierPokemonListGrid = "pokemonListGrid"
     private let identifierPokemonListCard = "pokemonCard_"
     private let identifierPokemonNavigationBar = "Pokemons"
@@ -55,11 +56,19 @@ final class PokeAPIListPokemonsUITests: XCTestCase {
     }
     
     func test_count_num_pokemons_on_list() {
-        XCTAssertTrue(app.otherElements[identifierPokemonListGrid].exists)
-        
+        XCTAssertTrue(app.otherElements[identifierPokemonListGrid].waitForExistence(timeout: 20))
+        let scrollPokemons = app.scrollViews[scrollPokemonsIdentifier]
+        XCTAssert(scrollPokemons.exists)
+        let MAX_SCROLLS = 3
+        var count = 0
+        while count < MAX_SCROLLS {
+            app.swipeUp()
+            count += 1
+        }
         let pokemonCards = app.buttons.matching(identifier: identifierPokemonListLink)
         
-        XCTAssertEqual(pokemonCards.count, 6)
+
+        XCTAssertEqual(pokemonCards.count, 30)
         
     }
     
@@ -89,5 +98,13 @@ final class PokeAPIListPokemonsUITests: XCTestCase {
         
         XCTAssertTrue(app.otherElements[identifierPokemonListGrid].waitForExistence(timeout: 5))
         
+    }
+}
+
+extension XCUIElement {
+    var isAtBottom: Bool {
+        // Comprueba si el contenido del ScrollView está en la parte inferior
+        guard self.exists else { return false }
+        return self.frame.contains(self.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.9)).screenPoint)
     }
 }

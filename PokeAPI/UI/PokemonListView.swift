@@ -41,6 +41,7 @@ struct PokemonListView: View {
                             .padding(16)
                         }
                         .navigationTitle("Pokemons")
+                        .accessibilityIdentifier("scrollPokemons")
                         .searchable(text: $searchPokemon)
                         .onChange(of: searchPokemon) { _, newValue in
                             viewModel.search(searchPokemon: newValue)
