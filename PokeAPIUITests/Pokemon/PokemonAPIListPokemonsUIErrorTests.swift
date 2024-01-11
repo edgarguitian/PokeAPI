@@ -27,7 +27,7 @@ final class PokemonAPIListPokemonsUIErrorTests: XCTestCase {
     func test_error_handling() throws {
 
         // Asegúrate de que la vista está presente
-        XCTAssertFalse(app.otherElements[identifierPokemonListGrid].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.otherElements[identifierPokemonListGrid].waitForExistence(timeout: 20))
         
         
         // Espera un tiempo razonable para que se maneje el error (ajusta según sea necesario)

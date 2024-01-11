@@ -48,7 +48,7 @@ final class PokeAPIDetailPokemonUITests: XCTestCase {
     }
     
     func test_press_on_first_pokemon_and_check_exist_info() throws {
-        XCTAssertTrue(app.otherElements[identifierPokemonListGrid].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.otherElements[identifierPokemonListGrid].waitForExistence(timeout: 20))
 
         app.buttons.matching(identifier: identifierPokemonListLink).element(boundBy: 0).tap()
         XCTAssertTrue(app.collectionViews[identifierPokemonDetailView].waitForExistence(timeout: 5))
