@@ -15,10 +15,9 @@ class APILocationAreaDataSourceStub: APILocationAreaDataSourceType {
     init(locationList: Result<PokeAPI.LocationAreaDTO, PokeAPI.HTTPClientError>) {
         self.locationList = locationList
     }
-    
+
     func getLocationInfo(url: String) async -> Result<PokeAPI.LocationAreaDTO, PokeAPI.HTTPClientError> {
         return locationList
     }
-    
-    
+
 }

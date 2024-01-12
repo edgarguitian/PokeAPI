@@ -14,10 +14,9 @@ class APISingleLocationDataSourceStub: APISingleLocationDataSourceType {
     init(locationList: Result<PokeAPI.LocationListInfoDTO, PokeAPI.HTTPClientError>) {
         self.locationList = locationList
     }
-    
+
     func getLocationInfo(url: String) async -> Result<PokeAPI.LocationListInfoDTO, PokeAPI.HTTPClientError> {
         return locationList
     }
-    
-    
+
 }

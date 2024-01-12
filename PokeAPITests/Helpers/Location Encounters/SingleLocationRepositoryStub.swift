@@ -15,9 +15,9 @@ class SingleLocationRepositoryStub: SingleLocationRepositoryType {
     init(result: Result<SingleLocationInfo, PokemonDomainError>) {
         self.result = result
     }
-    
+
     func getLocationInfo(url: String) async -> Result<SingleLocationInfo, PokemonDomainError> {
         return result
     }
-    
+
 }

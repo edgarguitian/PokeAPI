@@ -25,7 +25,13 @@ class PokemonListFactory {
     private static func createPokemonListRepository() -> PokemonListRepositoryType {
         return PokemonListRepository(apiDataSource: createApiPokemonListDataSource(),
                                      errorMapper: PokemonDomainErrorMapper(),
-                                     domainMapper: PokemonListDomainMapper())
+                                     domainMapper: PokemonListDomainMapper(),
+                                     cacheDataSource: createCacheDataSource())
+    }
+
+    private static func createCacheDataSource() -> CachePokemonListDataSourceType {
+        return SwiftDataCachePokemonListDataSource(container: SwiftDataPokemonListContainer.shared,
+                                                   mapper: SwiftDataPokemonListDomainMapper())
     }
 
     private static func createApiPokemonListDataSource() -> APIPokemonListDataSourceType {

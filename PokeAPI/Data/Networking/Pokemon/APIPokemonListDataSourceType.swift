@@ -8,6 +8,6 @@
 import Foundation
 
 protocol APIPokemonListDataSourceType {
-    func getPokemonList() async -> Result<PokemonListResponseDTO, HTTPClientError>
+    func getPokemonList(page: Int) async -> Result<PokemonListResponseDTO, HTTPClientError>
     func getPokemonListInfo(url: String) async -> Result<PokemonListInfoDTO, HTTPClientError>
 }

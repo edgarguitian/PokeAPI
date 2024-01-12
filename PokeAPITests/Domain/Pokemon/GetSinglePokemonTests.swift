@@ -13,10 +13,49 @@ final class GetSinglePokemonTests: XCTestCase {
     func test_execute_sucesfully_returns_single_pokemon() async throws {
         // GIVEN
         let pokemonId: String = "1"
-        let namePokemon: String = "Test Pokemon 1"
-        let baseExperience: String = "64"
-        let height: String = "100"
-        let weight: String = "32"
+        let mockResult = SinglePokemonInfo.makeTestable()
+
+        let result: Result<SinglePokemonInfo, PokemonDomainError> = .success(mockResult)
+        let stub = SinglePokemonRepositoryStub(result: result)
+        let sut = GetSinglePokemon(repository: stub)
+
+        // WHEN
+        let capturedResult = await sut.execute(pokemonId: pokemonId)
+
+        // THEN
+        let capturedSinglePokemon = try XCTUnwrap(capturedResult.get())
+        XCTAssertEqual(capturedSinglePokemon, mockResult)
+        XCTAssertEqual(capturedSinglePokemon.id, pokemonId)
+        XCTAssertEqual(capturedSinglePokemon.name, "Test Pokemon 1")
+        XCTAssertEqual(capturedSinglePokemon.baseExperience, "64")
+        XCTAssertEqual(capturedSinglePokemon.height, "100")
+        XCTAssertEqual(capturedSinglePokemon.weight, "32")
+        XCTAssertEqual(capturedSinglePokemon.locationAreaEncounters, "Test Location Area Encounters")
+        XCTAssertEqual(capturedSinglePokemon.sprites.frontDefault, "Test Front Default")
+        XCTAssertEqual(capturedSinglePokemon.sprites.backDefault, "Test back default")
+        XCTAssertEqual(capturedSinglePokemon.sprites.backShiny, "test back shiny")
+        XCTAssertEqual(capturedSinglePokemon.sprites.frontShiny, "test front shiny")
+
+    }
+
+    func test_execute_returns_error_when_repository_returns_error() async {
+        // GIVEN
+        let result: Result<SinglePokemonInfo, PokemonDomainError> = .failure(.generic)
+        let stub = SinglePokemonRepositoryStub(result: result)
+        let sut = GetSinglePokemon(repository: stub)
+
+        // WHEN
+        let capturedResult = await sut.execute(pokemonId: "1")
+
+        // THEN
+        XCTAssertEqual(capturedResult, result)
+    }
+
+}
+
+// Extensión para PokemonSprites
+private extension PokemonSprites {
+    static func makeTestable() -> PokemonSprites {
         let locationAreaEncounters = "Test Location Area Encounters"
         let spritesFrontDefault = "Test Front Default"
         let spritesBackDefault = "Test back default"
@@ -26,51 +65,109 @@ final class GetSinglePokemonTests: XCTestCase {
                                      backDefault: spritesBackDefault,
                                      backShiny: spritesBackShiny,
                                      frontShiny: spritesFrontShiny)
-        let species = PokemonNameUrl(name: "Test pokemon specie name", url: "test pokemon specie url")
-        let forms = [PokemonNameUrl(name: "Test pokemon form name", url: "Test pokemon form url")]
-        let abilities = [PokemonAbilities(isHidden: false, slot: "test pokemon abilities slot", ability: PokemonNameUrl(name: "test pokemon ability name", url: "test pokemon ability url"))]
-        let gameIndices = [PokemonGameIndices(gameIndex: "test game index", version: PokemonNameUrl(name: "test pokemon game indice version name", url: "test pokemon game indice version url"))]
-        let heldItems = [PokemonHeldItems(item: PokemonNameUrl(name: "test pokemon held items item name", url: "test pokemon held items item url"), versionDetails: [PokemonHeldItemVersionDetails(rarity: "test pokemon held items version details rarity", version: PokemonNameUrl(name: "test pokemon held items version details version name", url: "test pokemon held items version details version url"))])]
-        let moves = [PokemonMoves(move: PokemonNameUrl(name: "test pokemon moves move name", url: "test pokemon moves move url"), versionGroupDetails: [PokemonMoveVersionGroupDetails(levelLearnedAt: "test pokemon moves versiongroupdetails levellearnetat", versionGroup: PokemonNameUrl(name: "test pokemon moves versiongroupdetails versiongroup name", url: "test pokemon moves versiongroupdetails versiongroup url"), moveLearnMethod: PokemonNameUrl(name: "test pokemon moves versiongroupdetails movelearnmethod name", url: "test pokemon moves versiongroupdetails movelearnmethod url"))])]
-        let stats = [PokemonStats(baseStat: "test pokemon stats basestat", effort: "test pokemon stats effort", stat: PokemonNameUrl(name: "test pokemon stats stat name", url: "test pokemon stats stat url"))]
-        let types = [PokemonTypes(slot: "test pokemon types slot", type: PokemonNameUrl(name: "test pokemon types type name", url: "test pokemon types type url"))]
-        let pasttypes = [PokemonPastTypes(generation: PokemonNameUrl(name: "test pokemon pasttypes generation name", url: "test pokemon pasttypes generation url"), types: types)]
-        let mockResult = SinglePokemonInfo(id: pokemonId, name: namePokemon, baseExperience: baseExperience, height: height, weight: weight, abilities: abilities, forms: forms, gameIndices: gameIndices, heldItems: heldItems, locationAreaEncounters: locationAreaEncounters, moves: moves, species: species, sprites: sprites, stats: stats, types: types, pastTypes: pasttypes)
-        
-        let result: Result<SinglePokemonInfo, PokemonDomainError> = .success(mockResult)
-        let stub = SinglePokemonRepositoryStub(result: result)
-        let sut = GetSinglePokemon(repository: stub)
-        
-        // WHEN
-        let capturedResult = await sut.execute(pokemonId: pokemonId)
-        
-        // THEN
-        let capturedSinglePokemon = try XCTUnwrap(capturedResult.get())
-        XCTAssertEqual(capturedSinglePokemon, mockResult)
-        XCTAssertEqual(capturedSinglePokemon.id, pokemonId)
-        XCTAssertEqual(capturedSinglePokemon.name, namePokemon)
-        XCTAssertEqual(capturedSinglePokemon.baseExperience, baseExperience)
-        XCTAssertEqual(capturedSinglePokemon.height, height)
-        XCTAssertEqual(capturedSinglePokemon.weight, weight)
-        XCTAssertEqual(capturedSinglePokemon.locationAreaEncounters, locationAreaEncounters)
-        XCTAssertEqual(capturedSinglePokemon.sprites.frontDefault, spritesFrontDefault)
-        XCTAssertEqual(capturedSinglePokemon.sprites.backDefault, spritesBackDefault)
-        XCTAssertEqual(capturedSinglePokemon.sprites.backShiny, spritesBackShiny)
-        XCTAssertEqual(capturedSinglePokemon.sprites.frontShiny, spritesFrontShiny)
-
+        return sprites
     }
-    
-    func test_execute_returns_error_when_repository_returns_error() async {
-        // GIVEN
-        let result: Result<SinglePokemonInfo, PokemonDomainError> = .failure(.generic)
-        let stub = SinglePokemonRepositoryStub(result: result)
-        let sut = GetSinglePokemon(repository: stub)
-        
-        // WHEN
-        let capturedResult = await sut.execute(pokemonId: "1")
-        
-        // THEN
-        XCTAssertEqual(capturedResult, result)
-    }
+}
 
+private extension PokemonNameUrl {
+    static func makeTestable() -> PokemonNameUrl {
+        return PokemonNameUrl(name: "Test Pokemon Name", url: "Test Pokemon Url")
+    }
+}
+
+private extension PokemonAbilities {
+    static func makeTestable() -> PokemonAbilities {
+        let abilities = PokemonAbilities(isHidden: false,
+                                          slot: "test pokemon abilities slot",
+                                          ability: PokemonNameUrl.makeTestable())
+        return abilities
+    }
+}
+
+private extension PokemonGameIndices {
+    static func makeTestable() -> PokemonGameIndices {
+        let gameIndices = PokemonGameIndices(gameIndex: "test game index",
+                                              version: PokemonNameUrl.makeTestable())
+        return gameIndices
+    }
+}
+
+private extension PokemonHeldItemVersionDetails {
+    static func makeTestable() -> PokemonHeldItemVersionDetails {
+        return PokemonHeldItemVersionDetails(rarity: "test pokemon held items version details rarity",
+                                             version: PokemonNameUrl.makeTestable())
+    }
+}
+
+private extension PokemonHeldItems {
+    static func makeTestable() -> PokemonHeldItems {
+        return PokemonHeldItems(item: PokemonNameUrl.makeTestable(),
+                                versionDetails: [PokemonHeldItemVersionDetails.makeTestable()])
+    }
+}
+
+private extension PokemonMoveVersionGroupDetails {
+    static func makeTestable() -> PokemonMoveVersionGroupDetails {
+        return PokemonMoveVersionGroupDetails(levelLearnedAt: "test pokemon moves versiongroupdetails levellearnetat",
+                                              versionGroup: PokemonNameUrl.makeTestable(),
+                                              moveLearnMethod: PokemonNameUrl.makeTestable())
+    }
+}
+
+private extension PokemonMoves {
+    static func makeTestable() -> PokemonMoves {
+        return PokemonMoves(move: PokemonNameUrl(name: "test pokemon moves move name",
+                                                 url: "test pokemon moves move url"),
+                            versionGroupDetails: [PokemonMoveVersionGroupDetails.makeTestable()])
+    }
+}
+
+private extension PokemonStats {
+    static func makeTestable() -> PokemonStats {
+        return PokemonStats(baseStat: "test pokemon stats basestat",
+                            effort: "test pokemon stats effort",
+                            stat: PokemonNameUrl.makeTestable())
+    }
+}
+
+private extension PokemonTypes {
+    static func makeTestable() -> PokemonTypes {
+        return PokemonTypes(slot: "test pokemon types slot",
+                            type: PokemonNameUrl.makeTestable())
+    }
+}
+
+private extension PokemonPastTypes {
+    static func makeTestable() -> PokemonPastTypes {
+        return PokemonPastTypes(generation: PokemonNameUrl.makeTestable(),
+                                types: [PokemonTypes.makeTestable()])
+    }
+}
+
+private extension SinglePokemonInfo {
+    static func makeTestable() -> SinglePokemonInfo {
+        let pokemonId: String = "1"
+        let namePokemon: String = "Test Pokemon 1"
+        let baseExperience: String = "64"
+        let height: String = "100"
+        let weight: String = "32"
+        let locationAreaEncounters = "Test Location Area Encounters"
+
+        return SinglePokemonInfo(id: pokemonId,
+                                 name: namePokemon,
+                                 baseExperience: baseExperience,
+                                 height: height,
+                                 weight: weight,
+                                 abilities: [PokemonAbilities.makeTestable()],
+                                 forms: [PokemonNameUrl.makeTestable()],
+                                 gameIndices: [PokemonGameIndices.makeTestable()],
+                                 heldItems: [PokemonHeldItems.makeTestable()],
+                                 locationAreaEncounters: locationAreaEncounters,
+                                 moves: [PokemonMoves.makeTestable()],
+                                 species: PokemonNameUrl.makeTestable(),
+                                 sprites: PokemonSprites.makeTestable(),
+                                 stats: [PokemonStats.makeTestable()],
+                                 types: [PokemonTypes.makeTestable()],
+                                 pastTypes: [PokemonPastTypes.makeTestable()])
+    }
 }

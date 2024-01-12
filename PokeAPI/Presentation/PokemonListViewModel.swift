@@ -11,22 +11,28 @@ final class PokemonListViewModel: ObservableObject {
     private let getPokemonList: GetPokemonListType
     private let errorMapper: PokemonPresentableErrorMapper
     @Published var showLoadingSpinner: Bool = false
+    @Published var showLoadingNextPage: Bool = false
     @Published var showErrorMessage: String?
     @Published var filteredPokemonList: [PokemonListPresentableItem] = []
     var pokemonList: [PokemonListPresentableItem] = []
+    var currentPage: Int = 0
 
     init(getPokemonList: GetPokemonListType, errorMapper: PokemonPresentableErrorMapper) {
         self.getPokemonList = getPokemonList
         self.errorMapper = errorMapper
     }
 
-    func onAppear() {
-        let uiTestErrorHandling = ProcessInfo.processInfo.arguments.contains("UITestErrorHandling")
-        showErrorMessage = uiTestErrorHandling ? "Error al cargar la vista en UITest" : nil
-        showLoadingSpinner = true
+    func onAppear(isFirstLoad: Bool) {
+        if isFirstLoad {
+            let uiTestErrorHandling = ProcessInfo.processInfo.arguments.contains("UITestErrorHandling")
+            showErrorMessage = uiTestErrorHandling ? "Error al cargar la vista en UITest" : nil
+            showLoadingSpinner = true
+        } else {
+            showLoadingNextPage = true
+        }
         Task {
-            let result = await getPokemonList.execute()
-            handleResult(result)
+            let result = await getPokemonList.execute(page: currentPage)
+            handleResult(result, isFirstLoad: isFirstLoad)
         }
     }
 
@@ -41,7 +47,7 @@ final class PokemonListViewModel: ObservableObject {
         }
     }
 
-    func handleResult(_ result: Result<PokemonListInfoResponse, PokemonDomainError>) {
+    func handleResult(_ result: Result<PokemonListInfoResponse, PokemonDomainError>, isFirstLoad: Bool) {
         guard case .success(let pokemonListInfo) = result else {
             handleError(error: result.failureValue as? PokemonDomainError)
             return
@@ -53,8 +59,17 @@ final class PokemonListViewModel: ObservableObject {
 
         Task { @MainActor in
             showLoadingSpinner = false
-            self.pokemonList = pokemonsPresentable
-            self.filteredPokemonList = pokemonsPresentable
+            if isFirstLoad {
+                self.pokemonList = pokemonsPresentable
+                self.filteredPokemonList = pokemonsPresentable
+            } else {
+                self.pokemonList.append(contentsOf: pokemonsPresentable)
+                self.filteredPokemonList.append(contentsOf: pokemonsPresentable)
+                showLoadingNextPage = false
+            }
+            if filteredPokemonList.count < pokemonListInfo.count {
+                self.currentPage += 1
+            }
         }
     }
 

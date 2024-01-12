@@ -9,4 +9,6 @@ import Foundation
 
 struct PokemonListInfoResponse {
     let results: [PokemonListInfo]
+    let count: Int
+    let page: Int
 }

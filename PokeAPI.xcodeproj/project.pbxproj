@@ -17,6 +17,13 @@
 		6D3711F82B4C28E800239114 /* APILocationAreaDataSourceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3711F72B4C28E800239114 /* APILocationAreaDataSourceStub.swift */; };
 		6D3712002B4C2D3100239114 /* PokeAPIListPokemonsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3711FF2B4C2D3100239114 /* PokeAPIListPokemonsUITests.swift */; };
 		6D3712022B4C2D3100239114 /* PokeAPIListPokemonsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3712012B4C2D3100239114 /* PokeAPIListPokemonsUITestsLaunchTests.swift */; };
+		6D542F712B50679D00B58BC8 /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D542F702B50679D00B58BC8 /* CustomLoadingView.swift */; };
+		6D542F742B50691F00B58BC8 /* PokemonListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D542F732B50691F00B58BC8 /* PokemonListData.swift */; };
+		6D542F762B50693000B58BC8 /* SwiftDataPokemonListContainerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D542F752B50693000B58BC8 /* SwiftDataPokemonListContainerType.swift */; };
+		6D542F782B50693F00B58BC8 /* SwiftDataPokemonListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D542F772B50693F00B58BC8 /* SwiftDataPokemonListContainer.swift */; };
+		6D542F7A2B50695D00B58BC8 /* SwiftDataPokemonListDomainMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D542F792B50695D00B58BC8 /* SwiftDataPokemonListDomainMapper.swift */; };
+		6D542F7C2B50696F00B58BC8 /* SwiftDataCachePokemonListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D542F7B2B50696F00B58BC8 /* SwiftDataCachePokemonListDataSource.swift */; };
+		6D542F7F2B50699E00B58BC8 /* CachePokemonListDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D542F7E2B50699E00B58BC8 /* CachePokemonListDataSourceType.swift */; };
 		6D765B862B4AD2E4007769C1 /* GetSingleLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D765B852B4AD2E4007769C1 /* GetSingleLocation.swift */; };
 		6D765B882B4AD34F007769C1 /* GetSingleLocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D765B872B4AD34F007769C1 /* GetSingleLocationType.swift */; };
 		6D765B8A2B4AD36D007769C1 /* SingleLocationRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D765B892B4AD36D007769C1 /* SingleLocationRepositoryType.swift */; };
@@ -138,6 +145,13 @@
 		6D3711FD2B4C2D3100239114 /* PokeAPIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokeAPIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D3711FF2B4C2D3100239114 /* PokeAPIListPokemonsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeAPIListPokemonsUITests.swift; sourceTree = "<group>"; };
 		6D3712012B4C2D3100239114 /* PokeAPIListPokemonsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeAPIListPokemonsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6D542F702B50679D00B58BC8 /* CustomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
+		6D542F732B50691F00B58BC8 /* PokemonListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListData.swift; sourceTree = "<group>"; };
+		6D542F752B50693000B58BC8 /* SwiftDataPokemonListContainerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPokemonListContainerType.swift; sourceTree = "<group>"; };
+		6D542F772B50693F00B58BC8 /* SwiftDataPokemonListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPokemonListContainer.swift; sourceTree = "<group>"; };
+		6D542F792B50695D00B58BC8 /* SwiftDataPokemonListDomainMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPokemonListDomainMapper.swift; sourceTree = "<group>"; };
+		6D542F7B2B50696F00B58BC8 /* SwiftDataCachePokemonListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataCachePokemonListDataSource.swift; sourceTree = "<group>"; };
+		6D542F7E2B50699E00B58BC8 /* CachePokemonListDataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachePokemonListDataSourceType.swift; sourceTree = "<group>"; };
 		6D765B852B4AD2E4007769C1 /* GetSingleLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleLocation.swift; sourceTree = "<group>"; };
 		6D765B872B4AD34F007769C1 /* GetSingleLocationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleLocationType.swift; sourceTree = "<group>"; };
 		6D765B892B4AD36D007769C1 /* SingleLocationRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLocationRepositoryType.swift; sourceTree = "<group>"; };
@@ -264,6 +278,22 @@
 				6DC26FC22B4EB8A70093C04E /* Location Area */,
 			);
 			path = PokeAPIUITests;
+			sourceTree = "<group>";
+		};
+		6D542F722B50690A00B58BC8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6D542F732B50691F00B58BC8 /* PokemonListData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6D542F7D2B50698A00B58BC8 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				6D542F7E2B50699E00B58BC8 /* CachePokemonListDataSourceType.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		6D765B992B4B1716007769C1 /* Pokemon */ = {
@@ -636,6 +666,7 @@
 				6DDDE15A2B4ABB4E0046DCA5 /* PokemonDetailItemView.swift */,
 				6D765BB92B4B26E7007769C1 /* CreateLocationAreaView.swift */,
 				6D765BBB2B4B2703007769C1 /* LocationAreaView.swift */,
+				6D542F702B50679D00B58BC8 /* CustomLoadingView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -665,6 +696,7 @@
 			isa = PBXGroup;
 			children = (
 				6DFD395E2B473380002006EE /* Mapper */,
+				6D542F7D2B50698A00B58BC8 /* Cache */,
 				6DFD395F2B47338A002006EE /* DTOs */,
 				6DFD39602B473392002006EE /* Networking */,
 				6DFD39612B473399002006EE /* Repositories */,
@@ -768,6 +800,11 @@
 		6DFD39622B4733A6002006EE /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				6D542F722B50690A00B58BC8 /* Models */,
+				6D542F752B50693000B58BC8 /* SwiftDataPokemonListContainerType.swift */,
+				6D542F772B50693F00B58BC8 /* SwiftDataPokemonListContainer.swift */,
+				6D542F792B50695D00B58BC8 /* SwiftDataPokemonListDomainMapper.swift */,
+				6D542F7B2B50696F00B58BC8 /* SwiftDataCachePokemonListDataSource.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -792,10 +829,12 @@
 				6D3711F92B4C2D3100239114 /* Sources */,
 				6D3711FA2B4C2D3100239114 /* Frameworks */,
 				6D3711FB2B4C2D3100239114 /* Resources */,
+				6DBF859C2B513A8C00315358 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6DBF859B2B513A8700315358 /* PBXTargetDependency */,
 				6D3712042B4C2D3100239114 /* PBXTargetDependency */,
 			);
 			name = PokeAPIUITests;
@@ -810,10 +849,12 @@
 				6D765BC12B4BBBE9007769C1 /* Sources */,
 				6D765BC22B4BBBE9007769C1 /* Frameworks */,
 				6D765BC32B4BBBE9007769C1 /* Resources */,
+				6DBF85972B513A0C00315358 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6DBF85992B513A1400315358 /* PBXTargetDependency */,
 				6D765BCA2B4BBBE9007769C1 /* PBXTargetDependency */,
 			);
 			name = PokeAPITests;
@@ -913,6 +954,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6DBF85972B513A0C00315358 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse \n    echo \"warning: SwiftLint not installed\"\nfi\n";
+		};
+		6DBF859C2B513A8C00315358 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse \n    echo \"warning: SwiftLint not installed\"\nfi\n";
+		};
 		6DC26FC42B4EBA050093C04E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -977,9 +1052,11 @@
 				6DC06A562B49D19C00B08FBA /* PokemonAbilitiesDTO.swift in Sources */,
 				6DFD398D2B4738E4002006EE /* PokemonListResponse.swift in Sources */,
 				6DC06A762B49DEDA00B08FBA /* GetSinglePokemonType.swift in Sources */,
+				6D542F762B50693000B58BC8 /* SwiftDataPokemonListContainerType.swift in Sources */,
 				6DFD39992B47CB41002006EE /* PokemonListInfo.swift in Sources */,
 				6DFD39792B4734F6002006EE /* GetPokemonList.swift in Sources */,
 				6D765BA52B4B17E1007769C1 /* GetLocationAreaType.swift in Sources */,
+				6D542F782B50693F00B58BC8 /* SwiftDataPokemonListContainer.swift in Sources */,
 				6DFD39732B47346B002006EE /* PokemonDomainError.swift in Sources */,
 				6D765BBE2B4B28B2007769C1 /* LocationAreaFactory.swift in Sources */,
 				6D765BB62B4B1970007769C1 /* APILocationAreaDataSourceType.swift in Sources */,
@@ -998,6 +1075,7 @@
 				6D765B982B4B16BB007769C1 /* GetLocationArea.swift in Sources */,
 				6DC06A822B49E28100B08FBA /* APISinglePokemonDataSource.swift in Sources */,
 				6DC06A4E2B49CB2600B08FBA /* CreatePokemonDetailView.swift in Sources */,
+				6D542F7A2B50695D00B58BC8 /* SwiftDataPokemonListDomainMapper.swift in Sources */,
 				6DDDE15B2B4ABB4E0046DCA5 /* PokemonDetailItemView.swift in Sources */,
 				6D765B8C2B4AD3AA007769C1 /* SingleLocationInfo.swift in Sources */,
 				6D765BAC2B4B1887007769C1 /* LocationAreaDTO.swift in Sources */,
@@ -1013,6 +1091,7 @@
 				6DC06A5C2B49D28400B08FBA /* PokemonGameIndicesDTO.swift in Sources */,
 				6D765B8A2B4AD36D007769C1 /* SingleLocationRepositoryType.swift in Sources */,
 				6DC06A542B49CC0300B08FBA /* PokemonDetailViewModel.swift in Sources */,
+				6D542F742B50691F00B58BC8 /* PokemonListData.swift in Sources */,
 				6DFD398B2B473897002006EE /* PokemonListResponseDTO.swift in Sources */,
 				6D765B862B4AD2E4007769C1 /* GetSingleLocation.swift in Sources */,
 				6DC06A842B49E5B000B08FBA /* SinglePokemonInfo.swift in Sources */,
@@ -1020,10 +1099,12 @@
 				6DC06A722B49D7DA00B08FBA /* PokemonPastTypesDTO.swift in Sources */,
 				6DFD396B2B4733F9002006EE /* HTTPClientError.swift in Sources */,
 				6DFD39442B4732F5002006EE /* PokeAPIApp.swift in Sources */,
+				6D542F712B50679D00B58BC8 /* CustomLoadingView.swift in Sources */,
 				6DFD396F2B473418002006EE /* HTTPMethod.swift in Sources */,
 				6DC06A6E2B49D70600B08FBA /* PokemonStatsDTO.swift in Sources */,
 				6DFD399B2B47CB6A002006EE /* PokemonListInfoDTO.swift in Sources */,
 				6D765B8E2B4AD3F1007769C1 /* SingleLocationRepository.swift in Sources */,
+				6D542F7C2B50696F00B58BC8 /* SwiftDataCachePokemonListDataSource.swift in Sources */,
 				6D765BD12B4BBC32007769C1 /* Constants.swift in Sources */,
 				6DFD39712B47341F002006EE /* HTTPClient.swift in Sources */,
 				6DFD39832B473548002006EE /* APIPokemonListDataSource.swift in Sources */,
@@ -1031,6 +1112,7 @@
 				6D765BBA2B4B26E7007769C1 /* CreateLocationAreaView.swift in Sources */,
 				6D765BB12B4B18E1007769C1 /* LocationAreaRepository.swift in Sources */,
 				6DFD39532B47331A002006EE /* Foundation+Extensions.swift in Sources */,
+				6D542F7F2B50699E00B58BC8 /* CachePokemonListDataSourceType.swift in Sources */,
 				6D765BA32B4B17BC007769C1 /* LocationAreaInfo.swift in Sources */,
 				6DC06A502B49CB4400B08FBA /* PokemonDetailView.swift in Sources */,
 				6DFD39932B47C3EC002006EE /* PokemonEntry.swift in Sources */,
@@ -1064,6 +1146,14 @@
 			isa = PBXTargetDependency;
 			target = 6DFD393F2B4732F5002006EE /* PokeAPI */;
 			targetProxy = 6D765BC92B4BBBE9007769C1 /* PBXContainerItemProxy */;
+		};
+		6DBF85992B513A1400315358 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 6DBF85982B513A1400315358 /* SwiftLintPlugin */;
+		};
+		6DBF859B2B513A8700315358 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 6DBF859A2B513A8700315358 /* SwiftLintPlugin */;
 		};
 		6DC26FC62B4EBA330093C04E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1372,6 +1462,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6DBF85982B513A1400315358 /* SwiftLintPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6DC26FC32B4EB9FB0093C04E /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintPlugin";
+		};
+		6DBF859A2B513A8700315358 /* SwiftLintPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6DC26FC32B4EB9FB0093C04E /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintPlugin";
+		};
 		6DC26FC52B4EBA330093C04E /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6DC26FC32B4EB9FB0093C04E /* XCRemoteSwiftPackageReference "SwiftLint" */;

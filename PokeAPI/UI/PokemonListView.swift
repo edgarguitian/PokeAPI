@@ -22,29 +22,40 @@ struct PokemonListView: View {
     var body: some View {
         VStack {
             if viewModel.showLoadingSpinner {
-                ProgressView()
+                CustomLoadingView()
             } else {
                 if viewModel.showErrorMessage == nil {
                     NavigationStack {
-                        ScrollView {
-                            LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 20) {
-                                ForEach(viewModel.filteredPokemonList, id: \.self) { pokemon in
-                                    NavigationLink {
-                                        createPokemonDetailView.create(pokemonId: pokemon.id)
-                                    } label: {
-                                        PokemonCardView(pokemon: pokemon)
+                        ZStack {
+                            ScrollView {
+
+                                LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 20) {
+                                    ForEach(viewModel.filteredPokemonList, id: \.self) { pokemon in
+                                        NavigationLink {
+                                            createPokemonDetailView.create(pokemonId: pokemon.id)
+                                        } label: {
+                                            PokemonCardView(pokemon: pokemon)
+                                        }
+                                        .onAppear {
+                                            loadMorePokemonsIfNeeded(currentPokemon: pokemon)
+                                        }
+                                        .accessibilityIdentifier("pokemonListLink")
                                     }
-                                    .accessibilityIdentifier("pokemonListLink")
                                 }
+                                .accessibilityIdentifier("pokemonListGrid")
+                                .padding(16)
+
                             }
-                            .accessibilityIdentifier("pokemonListGrid")
-                            .padding(16)
-                        }
-                        .navigationTitle("Pokemons")
-                        .accessibilityIdentifier("scrollPokemons")
-                        .searchable(text: $searchPokemon)
-                        .onChange(of: searchPokemon) { _, newValue in
-                            viewModel.search(searchPokemon: newValue)
+                            .navigationTitle("Pokemons")
+                            .accessibilityIdentifier("scrollPokemons")
+                            .searchable(text: $searchPokemon)
+                            .onChange(of: searchPokemon) { _, newValue in
+                                viewModel.search(searchPokemon: newValue)
+                            }
+
+                            if viewModel.showLoadingNextPage {
+                                CustomLoadingView()
+                            }
                         }
                     }
                 } else {
@@ -54,7 +65,15 @@ struct PokemonListView: View {
             }
         }
         .onAppear {
-            viewModel.onAppear()
+            viewModel.onAppear(isFirstLoad: true)
+        }
+    }
+
+    func loadMorePokemonsIfNeeded(currentPokemon: PokemonListPresentableItem) {
+        Task {
+            if currentPokemon == viewModel.filteredPokemonList.last {
+                viewModel.onAppear(isFirstLoad: false)
+            }
         }
     }
 }

@@ -14,8 +14,9 @@ class APIPokemonListDataSource: APIPokemonListDataSourceType {
         self.httpClient = httpClient
     }
 
-    func getPokemonList() async -> Result<PokemonListResponseDTO, HTTPClientError> {
+    func getPokemonList(page: Int) async -> Result<PokemonListResponseDTO, HTTPClientError> {
         let queryParameters: [String: Any] = [
+            "offset": Constants.shared.numPokemons * page,
             "limit": Constants.shared.numPokemons
         ]
 

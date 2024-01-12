@@ -18,14 +18,14 @@ final class GetSingleLocationTests: XCTestCase {
           NameUrl(name: "Test Location NameURL Name 3", url: "Test Location NameURL URL 3")
         ]
         let mockResult = SingleLocationInfo(values: mockArray)
-        
+
         let result: Result<SingleLocationInfo, PokemonDomainError> = .success(mockResult)
         let stub = SingleLocationRepositoryStub(result: result)
         let sut = GetSingleLocation(repository: stub)
-        
+
         // WHEN
         let capturedResult = await sut.execute(url: "https://pokeapi.co/api/v2/pokemon/1/encounters")
-        
+
         // THEN
         let capturedSingleLocation = try XCTUnwrap(capturedResult.get())
         XCTAssertEqual(capturedSingleLocation.values.count, 3)
@@ -33,16 +33,14 @@ final class GetSingleLocationTests: XCTestCase {
         XCTAssertEqual(capturedSingleLocation.values[1], mockArray[1])
         XCTAssertEqual(capturedSingleLocation.values[2], mockArray[2])
 
-
-
     }
-    
+
     func test_execute_returns_error_when_repository_returns_error() async {
         // GIVEN
         let result: Result<SingleLocationInfo, PokemonDomainError> = .failure(.generic)
         let stub = SingleLocationRepositoryStub(result: result)
         let sut = GetSingleLocation(repository: stub)
-        
+
         // WHEN
         let capturedResult = await sut.execute(url: "https://pokeapi.co/api/v2/pokemon/1/encounters")
 

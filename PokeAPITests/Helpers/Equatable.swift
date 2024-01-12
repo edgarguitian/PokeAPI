@@ -14,16 +14,14 @@ extension PokemonListInfo: Equatable {
         lhs.name == rhs.name &&
         lhs.image == rhs.image
     }
-    
-    
+
 }
 
 extension PokemonListInfoResponse: Equatable {
     public static func == (lhs: PokemonListInfoResponse, rhs: PokemonListInfoResponse) -> Bool {
         return lhs.results == rhs.results
     }
-    
-    
+
 }
 
 extension SinglePokemonInfo: Equatable {
@@ -45,8 +43,7 @@ extension SinglePokemonInfo: Equatable {
         lhs.types == rhs.types &&
         lhs.pastTypes == rhs.pastTypes
     }
-    
-    
+
 }
 
 extension PokemonSprites: Equatable {
@@ -56,14 +53,12 @@ extension PokemonSprites: Equatable {
         lhs.backShiny == rhs.backShiny &&
         lhs.frontShiny == rhs.frontShiny
     }
-    
-    
+
 }
 
 extension SingleLocationInfo: Equatable {
     public static func == (lhs: SingleLocationInfo, rhs: SingleLocationInfo) -> Bool {
         return lhs.values == rhs.values
     }
-    
-    
+
 }

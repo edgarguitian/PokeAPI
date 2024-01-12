@@ -11,13 +11,13 @@ import Foundation
 class LocationAreaRepositoryStub: LocationAreaRepositoryType {
 
     private let result: Result<LocationAreaInfo, PokemonDomainError>
-    
+
     init(result: Result<LocationAreaInfo, PokemonDomainError>) {
         self.result = result
     }
-    
+
     func getLocationArea(url: String) async -> Result<LocationAreaInfo, PokemonDomainError> {
         return result
     }
-    
+
 }

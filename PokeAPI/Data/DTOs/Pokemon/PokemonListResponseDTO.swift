@@ -9,5 +9,5 @@ import Foundation
 
 struct PokemonListResponseDTO: Decodable {
     let results: [NameUrlDTO]
-
+    let count: Int
 }

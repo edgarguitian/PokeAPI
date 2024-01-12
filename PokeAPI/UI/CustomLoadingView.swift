@@ -9,7 +9,19 @@ import SwiftUI
 
 struct CustomLoadingView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                .frame(width: 20, height: 20)
+            Text("Loading")
+                .foregroundColor(.white)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundColor(.blue)
+
+        )
     }
 }
 

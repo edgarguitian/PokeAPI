@@ -14,13 +14,13 @@ final class PokemonAPIListPokemonsUIErrorTests: XCTestCase {
 
     override func setUp() {
         continueAfterFailure = false
-        
+
         app = XCUIApplication()
         app.launchArguments += ["UITestErrorHandling"]
         app.launch()
     }
 
-    override func tearDown()  {
+    override func tearDown() {
         app = nil
     }
 
@@ -28,11 +28,10 @@ final class PokemonAPIListPokemonsUIErrorTests: XCTestCase {
 
         // Asegúrate de que la vista está presente
         XCTAssertFalse(app.otherElements[identifierPokemonListGrid].waitForExistence(timeout: 20))
-        
-        
+
         // Espera un tiempo razonable para que se maneje el error (ajusta según sea necesario)
         sleep(3)
-        
+
         print(app.debugDescription)
         // Verifica que se muestra el mensaje de error
         XCTAssertTrue(app.staticTexts[identifierPokemonListErrorMessage].exists)

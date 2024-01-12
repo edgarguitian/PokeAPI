@@ -12,7 +12,8 @@ final class SingleLocationRepositoryTests: XCTestCase {
 
     func test_getLocationInfo_returns_success_with_one_item_when_there_is_one_location() async throws {
         // GIVEN
-        let apiDataSource = APISingleLocationDataSourceStub(locationList: .success(LocationListInfoDTO.makeLocationListInfo()))
+        let apiDataSource = APISingleLocationDataSourceStub(locationList:
+                .success(LocationListInfoDTO.makeLocationListInfo()))
         let sut = SingleLocationRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
 
         // WHEN
@@ -23,10 +24,11 @@ final class SingleLocationRepositoryTests: XCTestCase {
         XCTAssertEqual(singleLocation, SingleLocationInfo.makeSingleLocationInfo())
 
     }
-    
+
     func test_getLocationInfo_returns_success_with_three_items_when_there_are_three_locations() async throws {
         // GIVEN
-        let apiDataSource = APISingleLocationDataSourceStub(locationList: .success(LocationListInfoDTO.makeLocationListInfoThree()))
+        let apiDataSource = APISingleLocationDataSourceStub(locationList:
+                .success(LocationListInfoDTO.makeLocationListInfoThree()))
         let sut = SingleLocationRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
 
         // WHEN
@@ -37,15 +39,15 @@ final class SingleLocationRepositoryTests: XCTestCase {
         XCTAssertEqual(singleLocation, SingleLocationInfo.makeSingleLocationInfoThree())
 
     }
-    
+
     func test_getLocationInfo_returns_failure_when_apiDataSource_fails_ongetLocationInfo() async throws {
         // GIVEN
         let apiDataSource = APISingleLocationDataSourceStub(locationList: .failure(.clientError))
         let sut = SingleLocationRepository(apiDataSource: apiDataSource, errorMapper: PokemonDomainErrorMapper())
-        
+
         // WHEN
         let result = await sut.getLocationInfo(url: "https://pokeapi.co/api/v2/pokemon/35/encounters")
-        
+
         // THEN
         guard case .failure(let error) = result else {
             XCTFail("Expected failure, got success")
@@ -57,31 +59,71 @@ final class SingleLocationRepositoryTests: XCTestCase {
 
 }
 
+private extension NameUrlDTO {
+    static func makeTestable() -> NameUrlDTO {
+        return NameUrlDTO(name: "Test Name", url: "Test URL")
+    }
+}
+
+private extension EncounterDetail {
+    static func makeTestable() -> EncounterDetail {
+        return EncounterDetail(chance: 2,
+                               conditionValues: [NameUrlDTO.makeTestable()],
+                               maxLevel: 3,
+                                                method: NameUrlDTO.makeTestable(),
+                                                minLevel: 4)
+    }
+}
+
+private extension VersionDetail {
+    static func makeTestable() -> VersionDetail {
+        return VersionDetail(encounterDetails: [EncounterDetail.makeTestable()],
+                               maxChance: 5,
+                               version: NameUrlDTO.makeTestable())
+    }
+}
+
 private extension LocationListInfoDTO {
     static func makeLocationListInfo() -> [LocationItemInfoDTO] {
-        return [LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 1", url: "test locationArea url 1"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))])]
+        return [LocationItemInfoDTO(locationArea: NameUrlDTO.makeTestable(),
+                                    versionDetails: [VersionDetail.makeTestable()])]
     }
-    
+
     static func makeLocationListInfoThree() -> [LocationItemInfoDTO] {
         return [
-            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 1", url: "test locationArea url 1"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))]),
-            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 2", url: "test locationArea url 2"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))]),
-            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 3", url: "test locationArea url 3"), versionDetails: [VersionDetail(encounterDetails: [EncounterDetail(chance: 1, conditionValues: [NameUrlDTO(name: "test conditionValues name", url: "test conditionValues url")], maxLevel: 2, method: NameUrlDTO(name: "test method name", url: "test method url"), minLevel: 3)], maxChance: 4, version: NameUrlDTO(name: "test version name", url: "test version url"))])
-        
+            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 1",
+                                                         url: "test locationArea url 1"),
+                                versionDetails: [VersionDetail.makeTestable()]),
+            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 2",
+                                                         url: "test locationArea url 2"),
+                                versionDetails: [VersionDetail.makeTestable()]),
+            LocationItemInfoDTO(locationArea: NameUrlDTO(name: "test locationArea name 3",
+                                                         url: "test locationArea url 3"),
+                                versionDetails: [VersionDetail.makeTestable()])
+
         ]
+    }
+}
+
+private extension NameUrl {
+    static func makeTestable() -> NameUrl {
+        return NameUrl(name: "Test Name", url: "Test URL")
     }
 }
 
 private extension SingleLocationInfo {
     static func makeSingleLocationInfo() -> SingleLocationInfo {
-        return SingleLocationInfo(values: [NameUrl(name: "test locationArea name 1", url: "test locationArea url 1")])
+        return SingleLocationInfo(values: [NameUrl.makeTestable()])
     }
-    
+
     static func makeSingleLocationInfoThree() -> SingleLocationInfo {
         return SingleLocationInfo(values: [
-            NameUrl(name: "test locationArea name 1", url: "test locationArea url 1"),
-            NameUrl(name: "test locationArea name 2", url: "test locationArea url 2"),
-            NameUrl(name: "test locationArea name 3", url: "test locationArea url 3")
+            NameUrl(name: "test locationArea name 1",
+                    url: "test locationArea url 1"),
+            NameUrl(name: "test locationArea name 2",
+                    url: "test locationArea url 2"),
+            NameUrl(name: "test locationArea name 3",
+                    url: "test locationArea url 3")
         ])
     }
 }

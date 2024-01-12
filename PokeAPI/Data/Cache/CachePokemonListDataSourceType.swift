@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol CachePokemonListDataSourceType {
+    func getPokemonsList(page: Int) async -> PokemonListInfoResponse
+    func savePokemonsList(_ pokemonsList: PokemonListInfoResponse, page: Int) async
+}

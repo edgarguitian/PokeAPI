@@ -9,15 +9,15 @@ import Foundation
 @testable import PokeAPI
 
 class PokemonListRepositoryStub: PokemonListRepositoryType {
+
     private let result: Result<PokeAPI.PokemonListInfoResponse, PokeAPI.PokemonDomainError>
-    
+
     init(result: Result<PokeAPI.PokemonListInfoResponse, PokeAPI.PokemonDomainError>) {
         self.result = result
     }
-    
-    func getPokemonList() async -> Result<PokeAPI.PokemonListInfoResponse, PokeAPI.PokemonDomainError> {
+
+    func getPokemonList(page: Int) async -> Result<PokeAPI.PokemonListInfoResponse, PokeAPI.PokemonDomainError> {
         return result
     }
-    
-    
+
 }
